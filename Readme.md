@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Никита Зимин](https://up.htmlacademy.ru/nodejs-2/5/user/2297897).
-* Наставник: `Неизвестно`.
+* Наставник: [Константин Ильин](https://htmlacademy.ru/profile/id2374827).
 
 ---
 
