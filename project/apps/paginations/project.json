@@ -1,0 +1,57 @@
+{
+  "name": "paginations",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/paginations/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/paginations",
+        "main": "apps/paginations/src/main.ts",
+        "tsConfig": "apps/paginations/tsconfig.app.json",
+        "assets": ["apps/paginations/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/paginations/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "paginations:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "paginations:build:development"
+        },
+        "production": {
+          "buildTarget": "paginations:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/paginations/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/paginations/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
