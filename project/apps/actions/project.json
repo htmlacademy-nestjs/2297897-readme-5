@@ -1,7 +1,7 @@
 {
-  "name": "paginations",
+  "name": "actions",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/paginations/src",
+  "sourceRoot": "apps/actions/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,12 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/paginations",
-        "main": "apps/paginations/src/main.ts",
-        "tsConfig": "apps/paginations/tsconfig.app.json",
-        "assets": ["apps/paginations/src/assets"],
+        "outputPath": "dist/apps/actions",
+        "main": "apps/actions/src/main.ts",
+        "tsConfig": "apps/actions/tsconfig.app.json",
+        "assets": ["apps/actions/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/paginations/webpack.config.js"
+        "webpackConfig": "apps/actions/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -27,14 +27,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "paginations:build"
+        "buildTarget": "actions:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "paginations:build:development"
+          "buildTarget": "actions:build:development"
         },
         "production": {
-          "buildTarget": "paginations:build:production"
+          "buildTarget": "actions:build:production"
         }
       }
     },
@@ -42,14 +42,14 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/paginations/**/*.ts"]
+        "lintFilePatterns": ["apps/actions/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/paginations/jest.config.ts"
+        "jestConfig": "apps/actions/jest.config.ts"
       }
     }
   },
