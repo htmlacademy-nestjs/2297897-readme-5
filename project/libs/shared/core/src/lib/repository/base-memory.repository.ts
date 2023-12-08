@@ -1,6 +1,6 @@
-import { randomUUID } from "crypto";
-import { Entity, EntityIdType } from "./entity.interface";
-import { Repository } from "./repository.interface";
+import { randomUUID } from 'crypto';
+import { Entity, EntityIdType } from './entity.interface';
+import { Repository } from './repository.interface';
 
 export abstract class BaseMemoryRepository<T extends Entity<EntityIdType>> implements Repository<T> {
   protected entities: Map<T['id'], T> = new Map();
