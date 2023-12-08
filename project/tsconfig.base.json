@@ -15,10 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@project/libs/shared/core": ["libs/shared/core/src/index.ts"],
       "@project/libs/shared/helpers": ["libs/shared/helpers/src/index.ts"],
-      "@project/libs/shared/shared-types": [
-        "libs/shared/shared-types/src/index.ts"
-      ]
+      "@project/libs/shared/shared-types": ["libs/shared/shared-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
