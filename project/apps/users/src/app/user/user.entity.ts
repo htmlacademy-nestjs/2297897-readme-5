@@ -2,13 +2,14 @@ import { AuthUser } from '@project/libs/shared/shared-types';
 import { Entity } from '@project/libs/shared/core';
 import { compare, genSalt, hash } from 'bcrypt';
 import { SALT_ROUNDS } from './user.constant';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UserEntity implements AuthUser, Entity<string>{
   public id: string;
   public name: string;
   public email: string;
   public passwordHash: string;
-  public createdAt: Date;
   public avatarUrl: string;
 
   constructor(user: AuthUser) {
@@ -16,11 +17,10 @@ export class UserEntity implements AuthUser, Entity<string>{
   }
 
   public populate(user: AuthUser): void {
-    this.id = user.id;
     this.email = user.email;
     this.name = user.name;
-    this.createdAt = new Date();
     this.avatarUrl = user.avatarUrl;
+    this.passwordHash = user.passwordHash;
   }
 
   public toPOJO() {
@@ -28,7 +28,6 @@ export class UserEntity implements AuthUser, Entity<string>{
       id: this.id,
       email: this.email,
       name: this.name,
-      createdAt: this.createdAt,
       passwordHash: this.passwordHash,
       avatarUrl: this.avatarUrl,
     }
