@@ -15,13 +15,13 @@ export class AuthController {
   @Post('register')
   public async create(@Body() dto: CreateUserDTO) {
     const newUser = await this.authService.register(dto);
-    return fillDTO(LoggedUserRDO, newUser.serialize())
+    return fillDTO(UserRDO, newUser.serialize())
   }
 
   @Post('login')
   public async login(@Body() dto: LoginUserDTO) {
     const verifiedUser = await this.authService.verifyUser(dto);
-    return fillDTO(UserRDO, verifiedUser.serialize());
+    return fillDTO(LoggedUserRDO, verifiedUser.serialize());
   }
 
   @Get(':id')
