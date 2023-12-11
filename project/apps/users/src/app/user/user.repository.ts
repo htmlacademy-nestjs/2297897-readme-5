@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { BaseMemoryRepository } from '@project/libs/shared/core';
-import { AuthUser } from '@project/libs/shared/shared-types';
 import { UserEntity } from './user.entity';
 
 @Injectable()
