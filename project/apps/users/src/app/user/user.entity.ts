@@ -23,7 +23,7 @@ export class UserEntity implements AuthUser, Entity<string>{
     this.passwordHash = user.passwordHash;
   }
 
-  public toPOJO() {
+  public serialize() {
     return {
       id: this.id,
       email: this.email,

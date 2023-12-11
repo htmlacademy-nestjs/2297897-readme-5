@@ -2,9 +2,8 @@ import { ConflictException, Injectable, NotFoundException, UnauthorizedException
 import { UserMemoryRepository } from '../user/user.repository';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserEntity } from '../user/user.entity';
-import { AuthErrorMessage } from './auth.constant';
+import { AuthErrorMessage } from './auth.messages';
 import { LoginUserDTO } from './dto/login-user.dto';
-import { AuthUser } from '@project/libs/shared/shared-types';
 
 @Injectable()
 export class AuthService {
@@ -12,41 +11,41 @@ export class AuthService {
     private readonly userRepository: UserMemoryRepository,
   ) { }
 
-  public async register(dto: CreateUserDTO): Promise<AuthUser> {
+  public async register(dto: CreateUserDTO): Promise<UserEntity> {
     const { name, email, password, avatarUrl } = dto;
 
-    const existsUser = await this.userRepository.findByEmail(email);
+    const existUser = await this.userRepository.findByEmail(email);
 
-    if (existsUser) {
+    if (existUser) {
       throw new ConflictException(AuthErrorMessage.USER_EXISTS_CONFLICT);
     }
 
     const userEntity = await new UserEntity({
       name,
       email,
-      avatarUrl,
+      avatarUrl: avatarUrl ?? '',
       passwordHash: ''
     }).setPassword(password);
 
     return this.userRepository.save(userEntity);
   }
 
-  public async verifyUser(dto: LoginUserDTO): Promise<AuthUser> {
+  public async verifyUser(dto: LoginUserDTO): Promise<UserEntity> {
     const { email, password } = dto;
-    const existsUser = await this.userRepository.findByEmail(email);
-    if (!existsUser) {
+    const existUser = await this.userRepository.findByEmail(email);
+
+    if (!existUser) {
       throw new NotFoundException(AuthErrorMessage.USER_NOT_EXISTS);
     }
-    const userEntity = new UserEntity(existsUser);
 
-    if (! await userEntity.comparePassword(password)) {
+    if (! await existUser.comparePassword(password)) {
       throw new UnauthorizedException(AuthErrorMessage.WRONG_PASSWORD);
     }
 
-    return userEntity.toPOJO();
+    return existUser;
   }
 
-  public async getUser(id: string): Promise<AuthUser> {
+  public async getUser(id: string): Promise<UserEntity> {
     return this.userRepository.findById(id);
   }
 }
