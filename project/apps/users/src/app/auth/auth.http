@@ -23,6 +23,6 @@ Content-Type: application/json
 ###
 
 #Get user by id
-GET http://localhost:8000/api/auth/084bb337-3b09-483b-ac42-f945a1e109d5 HTTP/1.1
+GET http://localhost:8000/api/auth/0a3f9209-8960-4a93-a846-6a10bdf19ca3 HTTP/1.1
 
 ###
