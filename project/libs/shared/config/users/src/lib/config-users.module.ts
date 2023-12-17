@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ENV_USERS_FILEPATH } from './config-users.const';
 import applicationConfig from './app.config';
-import mongoConfig from './mongo.config';
+import mongoConfig from './mongodb/mongo.config';
 
 @Module({
   imports: [
