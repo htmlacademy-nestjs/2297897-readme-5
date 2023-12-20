@@ -42,4 +42,8 @@ export class UserEntity implements AuthUser, Entity<string>{
   public async comparePassword(password: string): Promise<boolean> {
     return compare(password, this.passwordHash);
   }
+
+  static fromObject(data: AuthUser): UserEntity {
+    return new UserEntity(data);
+  }
 }

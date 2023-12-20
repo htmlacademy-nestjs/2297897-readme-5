@@ -9,7 +9,6 @@ export class UserRDO {
   @Expose()
   public id: string;
 
-
   @Expose()
   public name: string;
 

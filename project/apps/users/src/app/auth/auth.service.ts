@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { UserMemoryRepository } from '../user/user.repository';
+import { UserRepository } from '../user/user.repository';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserEntity } from '../user/user.entity';
 import { AuthErrorMessage } from './auth.messages';
@@ -8,7 +8,7 @@ import { LoginUserDTO } from './dto/login-user.dto';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepository: UserMemoryRepository,
+    private readonly userRepository: UserRepository,
   ) { }
 
   public async register(dto: CreateUserDTO): Promise<UserEntity> {
@@ -46,6 +46,12 @@ export class AuthService {
   }
 
   public async getUser(id: string): Promise<UserEntity> {
-    return this.userRepository.findById(id);
+    const existsUser = this.userRepository.findById(id);
+
+    if(!existsUser) {
+      throw new NotFoundException(`Entity with id ${id} not found`);
+    }
+
+    return existsUser;
   }
 }
