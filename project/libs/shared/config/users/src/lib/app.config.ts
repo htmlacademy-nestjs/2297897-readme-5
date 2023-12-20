@@ -1,9 +1,11 @@
 import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 
-const ENVIRONMENTS = ['development', 'production', 'stage'] as const;
-
-type Environment = typeof ENVIRONMENTS[number];
+enum Environment {
+  Development = 'development',
+  Production = 'production',
+  Stage = 'stage',
+};
 
 type ApplicationConfig = {
   environment: Environment,
@@ -11,7 +13,7 @@ type ApplicationConfig = {
 }
 
 const validationSchema = Joi.object({
-  environment: Joi.string().valid(...ENVIRONMENTS).required(),
+  environment: Joi.string().valid(...Object.values(Environment)).required(),
   port: Joi.number().port().required(),
 })
 
