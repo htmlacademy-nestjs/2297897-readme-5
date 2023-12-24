@@ -9,3 +9,54 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Post {
+  id             String    @id @default(uuid())
+  userId         String    @map("user_id")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  postState      PostState @default(draft) @map("post_state")
+  postType       PostType  @map("post_type")
+  tags           Tag[]
+  isResposted    Boolean   @default(false) @map("is_reposted")
+  creatorUserId  String?   @map("creator_user_id")
+  originalPostId String?
+  publishDate    DateTime? @map("publish_date")
+  link           String?
+  likesCount     Int       @default(0) @map("likes_count")
+  commentsCount  Int       @default(0)
+  description    String?
+  photoUrl       String?   @map("photo_url")
+  quoteText      String?   @map("quote_text")
+  quoteAuthor    String?   @map("quote_author")
+  title          String?
+  announcement   String?
+  postText       String?   @map("post_text")
+  videoLink      String?   @map("video_link")
+
+  @@map("posts")
+}
+
+model Tag {
+  id        String   @id @default(uuid())
+  title     String
+  posts     Post[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index(title)
+  @@map("tags")
+}
+
+enum PostType {
+  video
+  text
+  quote
+  photo
+  link
+}
+
+enum PostState {
+  draft
+  published
+}
