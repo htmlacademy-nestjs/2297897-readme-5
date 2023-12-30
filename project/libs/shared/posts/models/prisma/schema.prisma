@@ -20,11 +20,12 @@ model Post {
   tags           Tag[]
   isResposted    Boolean   @default(false) @map("is_reposted")
   creatorUserId  String?   @map("creator_user_id")
-  originalPostId String?
+  originalPostId String?   @map("original_post_id")
   publishDate    DateTime? @map("publish_date")
   link           String?
   likesCount     Int       @default(0) @map("likes_count")
-  commentsCount  Int       @default(0)
+  commentsCount  Int       @default(0) @map("comments_count")
+  comments       Comment[]
   description    String?
   photoUrl       String?   @map("photo_url")
   quoteText      String?   @map("quote_text")
@@ -44,8 +45,21 @@ model Tag {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@index(title)
+  @@index([title])
   @@map("tags")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  message   String
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  postId    String   @map("post_id")
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([postId])
+  @@map("comments")
 }
 
 enum PostType {
