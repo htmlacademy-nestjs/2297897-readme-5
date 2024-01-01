@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   public async getUser(id: string): Promise<UserEntity> {
-    const existsUser = this.userRepository.findById(id);
+    const existsUser = await this.userRepository.findById(id);
 
     if(!existsUser) {
       throw new NotFoundException(`Entity with id ${id} not found`);
