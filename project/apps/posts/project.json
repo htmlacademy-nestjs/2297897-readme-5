@@ -72,6 +72,13 @@
         "command": "npx prisma migrate reset --schema ./schema.prisma --force --skip-generate --skip-seed",
         "cwd": "libs/shared/posts/models/prisma"
       }
+    },
+    "db:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx prisma generate --schema ./schema.prisma",
+        "cwd": "libs/shared/posts/models/prisma"
+      }
     }
   },
   "tags": []
