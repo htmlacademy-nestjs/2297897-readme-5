@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PostType, PostState, Comment, Tag } from '../../../types/src/index';
+import { PostType, PostState, Tag } from '../../../types/src/index';
 
 const FIRST_TAG_UUID = '39614113-7ad5-45b6-8093-06455437e1e2';
 const SECOND_TAG_UUID = 'efd775e2-df55-4e0e-a308-58249f5ea202';

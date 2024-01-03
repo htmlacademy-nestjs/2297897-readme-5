@@ -1,1 +1,3 @@
-export * from './lib/shared-posts-models';
+export * from './lib/prisma-client.module';
+export * from './lib/prisma-client.service';
+
