@@ -1,0 +1,9 @@
+import { Post } from "../posts/post.interface";
+
+export interface Like {
+  id: string;
+  postId?: string;
+  userId: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}

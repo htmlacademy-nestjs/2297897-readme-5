@@ -20,7 +20,7 @@ export class AuthController {
   })
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'The new user has been sucessfully created.'
+    description: 'The new user has been successfully created.'
   })
   @Post('register')
   public async create(@Body() dto: CreateUserDTO) {
