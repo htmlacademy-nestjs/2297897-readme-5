@@ -3,10 +3,10 @@ POST http://localhost:3333/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "RonWizley",
-  "password": "Magician31337",
-  "avatarUrl": "uploads/avatars/RonWizley",
-  "email": "ronwiz@hogwarts.com"
+  "name": "RandyOrton",
+  "password": "Wrestler31337",
+  "avatarUrl": "uploads/avatars/Wrestler",
+  "email": "randyortoan@gmail.com"
 }
 
 ###

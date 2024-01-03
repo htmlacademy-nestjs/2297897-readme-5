@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { plainToClass } from 'class-transformer';
 import { MongoConfiguration } from './mongo.env';
-import {ConfigType} from '@nestjs/config';
+import { ConfigType } from '@nestjs/config';
 
 export interface MongoDatabaseConfig {
   name: string,
