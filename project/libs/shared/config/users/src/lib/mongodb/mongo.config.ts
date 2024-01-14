@@ -3,15 +3,6 @@ import { plainToClass } from 'class-transformer';
 import { MongoConfiguration } from './mongo.env';
 import { ConfigType } from '@nestjs/config';
 
-export interface MongoDatabaseConfig {
-  name: string,
-  host: string,
-  port: number,
-  user: string,
-  password: string,
-  authBase: string,
-}
-
 async function getDatabaseConfig(): Promise<MongoConfiguration> {
   const config = plainToClass(MongoConfiguration, {
     name: process.env.MONGO_DB,
