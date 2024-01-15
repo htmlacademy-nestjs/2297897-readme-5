@@ -2,9 +2,10 @@ import { BasePostgresRepository } from '@project/libs/shared/core';
 import { PostTagEntity } from './post-tag.entity';
 import { Tag } from '@project/libs/shared/types';
 import { PrismaClientService } from '@project/libs/shared/posts/models';
-import { NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { TagFilter, tagFilterToPrismaFilter } from './post-tag.filter';
 
+@Injectable()
 export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag> {
   constructor(
     protected readonly client: PrismaClientService,
@@ -18,20 +19,27 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
     })
 
     if (!document) {
-      throw new NotFoundException(`Tag with id ${id} not found`);
+      throw new NotFoundException(`Tag with id «${id}» not found`);
     }
 
     return this.createEntityFromDocument(document);
   }
 
-  public async find(filter: TagFilter): Promise<PostTagEntity[]> {
+  public async find(filter?: TagFilter): Promise<PostTagEntity[]> {
     const where = filter ?? tagFilterToPrismaFilter(filter);
     const documents = await this.client.tag.findMany({ where });
-
     return documents.map((document) => this.createEntityFromDocument(document));
   }
 
   public async save(entity: PostTagEntity): Promise<PostTagEntity> {
+    const existDocument = await this.client.tag.findFirst({
+      where: { title: entity.title },
+    });
+
+    if (existDocument) {
+      throw new ConflictException(`Tag with name «${entity.title}» already exists`)
+    }
+
     const record = await this.client.tag.create({
       data: { ...entity.serialize() },
     });
@@ -41,25 +49,41 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
   }
 
   public async update(id: string, entity: PostTagEntity): Promise<PostTagEntity> {
+    const existDocument = await this.client.tag.findFirst({
+      where: { id },
+    });
+
+    if (!existDocument) {
+      throw new NotFoundException(`Tag with id «${id}» not found`);
+    }
+
+    const sameNamedDocument = await this.client.tag.findFirst({
+      where: { title: entity.title },
+    });
+
+    if(sameNamedDocument) {
+      throw new ConflictException(`Tag with name «${entity.title}» already exists`)
+    }
+
     const updatedDocument = await this.client.tag.update({
       where: { id },
       data: { title: entity.title },
     });
 
-    if (!updatedDocument) {
-      throw new NotFoundException(`Tag with id ${id} not found`);
-    }
-
     return this.createEntityFromDocument(updatedDocument);
   }
 
   public async deleteById(id: string): Promise<void> {
-    const deletedDocument = await this.client.tag.delete({
+    const existDocument = await this.client.tag.findFirst({
       where: { id },
     });
 
-    if(!deletedDocument) {
-      throw new NotFoundException(`Tag with id ${id} not found`);
+    if (!existDocument) {
+      throw new NotFoundException(`Tag with id «${id}» not found`);
     }
+
+    await this.client.tag.delete({
+      where: { id },
+    });
   }
 }
