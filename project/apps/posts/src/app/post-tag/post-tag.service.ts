@@ -11,6 +11,12 @@ export class PostTagService {
   ) { }
 
   public async createPostTag(dto: CreatePostTagDTO): Promise<PostTagEntity> {
+    const existsPostTag = (await this.postTagRepositoty.find({ title: dto.title })).at(0);
+
+    if (existsPostTag) {
+      throw new ConflictException(`Tag with title «${dto.title}» already exists`)
+    }
+
     const newPostTag = new PostTagEntity(dto);
     await this.postTagRepositoty.save(newPostTag);
 
@@ -26,13 +32,27 @@ export class PostTagService {
   }
 
   public async updatePostTag(id: string, dto: UpdatePostTagDTO): Promise<PostTagEntity> {
-    const postTagEntity = new PostTagEntity(dto);
-    await this.postTagRepositoty.update(id, postTagEntity);
+    const sameNamedTag = (await this.postTagRepositoty.find({ title: dto.title })).at(0);
 
-    return postTagEntity;
+    if (sameNamedTag) {
+      throw new ConflictException(`Tag with title «${dto.title}» already exists`)
+    }
+
+    const postTagEntity = new PostTagEntity(dto);
+
+    try {
+      await this.postTagRepositoty.update(id, postTagEntity);
+      return postTagEntity;
+    } catch {
+      throw new NotFoundException(`Tag with id «${id}» not found`);
+    }
   }
 
   public async deletePostTag(id: string): Promise<void> {
-    await this.postTagRepositoty.deleteById(id);
+    try {
+      await this.postTagRepositoty.deleteById(id);
+    } catch {
+      throw new NotFoundException(`Tag with id «${id}» not found`);
+    }
   }
 }

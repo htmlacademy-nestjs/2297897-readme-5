@@ -32,14 +32,6 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
   }
 
   public async save(entity: PostTagEntity): Promise<PostTagEntity> {
-    const existDocument = await this.client.tag.findFirst({
-      where: { title: entity.title },
-    });
-
-    if (existDocument) {
-      throw new ConflictException(`Tag with name «${entity.title}» already exists`)
-    }
-
     const record = await this.client.tag.create({
       data: { ...entity.serialize() },
     });
@@ -49,22 +41,6 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
   }
 
   public async update(id: string, entity: PostTagEntity): Promise<PostTagEntity> {
-    const existDocument = await this.client.tag.findFirst({
-      where: { id },
-    });
-
-    if (!existDocument) {
-      throw new NotFoundException(`Tag with id «${id}» not found`);
-    }
-
-    const sameNamedDocument = await this.client.tag.findFirst({
-      where: { title: entity.title },
-    });
-
-    if(sameNamedDocument) {
-      throw new ConflictException(`Tag with name «${entity.title}» already exists`)
-    }
-
     const updatedDocument = await this.client.tag.update({
       where: { id },
       data: { title: entity.title },
@@ -74,14 +50,6 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
   }
 
   public async deleteById(id: string): Promise<void> {
-    const existDocument = await this.client.tag.findFirst({
-      where: { id },
-    });
-
-    if (!existDocument) {
-      throw new NotFoundException(`Tag with id «${id}» not found`);
-    }
-
     await this.client.tag.delete({
       where: { id },
     });

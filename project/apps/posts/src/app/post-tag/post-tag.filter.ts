@@ -5,7 +5,7 @@ export interface TagFilter {
   title?: string;
 }
 
-export function tagFilterToPrismaFilter(filter: TagFilter): Prisma.TagWhereInput {
+export function tagFilterToPrismaFilter(filter: TagFilter): Prisma.TagWhereInput | undefined {
   if (!filter) {
     return undefined;
   }

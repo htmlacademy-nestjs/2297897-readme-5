@@ -1,7 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
 import { PostTagService } from './post-tag.service';
 import { CreatePostTagDTO } from './dto/create-post-tag.dto';
-import { PostTagEntity } from './post-tag.entity';
 import {fillDTO} from '@project/libs/shared/helpers';
 import { PostTagRDO } from './rdo/post-tag.rdo';
 import { UpdatePostTagDTO } from './dto/update-post-tag.dto';
