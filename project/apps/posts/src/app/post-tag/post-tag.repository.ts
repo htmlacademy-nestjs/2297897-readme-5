@@ -2,7 +2,7 @@ import { BasePostgresRepository } from '@project/libs/shared/core';
 import { PostTagEntity } from './post-tag.entity';
 import { Tag } from '@project/libs/shared/types';
 import { PrismaClientService } from '@project/libs/shared/posts/models';
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { TagFilter, tagFilterToPrismaFilter } from './post-tag.filter';
 
 @Injectable()

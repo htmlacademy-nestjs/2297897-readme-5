@@ -41,8 +41,8 @@ export class PostTagService {
     const postTagEntity = new PostTagEntity(dto);
 
     try {
-      await this.postTagRepositoty.update(id, postTagEntity);
-      return postTagEntity;
+      const updatedPostTag = await this.postTagRepositoty.update(id, postTagEntity);
+      return updatedPostTag;
     } catch {
       throw new NotFoundException(`Tag with id «${id}» not found`);
     }

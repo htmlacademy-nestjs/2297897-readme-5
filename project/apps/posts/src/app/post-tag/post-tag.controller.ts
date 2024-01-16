@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from '@nestjs/common';
 import { PostTagService } from './post-tag.service';
 import { CreatePostTagDTO } from './dto/create-post-tag.dto';
 import {fillDTO} from '@project/libs/shared/helpers';
@@ -36,6 +36,7 @@ export class PostTagController {
   }
 
   @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   public async delete(@Param('id') id: string) {
     await this.postTagService.deletePostTag(id);
   }
