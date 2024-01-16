@@ -1,4 +1,4 @@
-import { Post } from "../posts/post.interface";
+import { Post } from '../posts/post.interface';
 
 export interface Like {
   id: string;

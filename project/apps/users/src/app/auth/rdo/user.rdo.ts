@@ -9,6 +9,10 @@ export class UserRDO {
   @Expose()
   public id: string;
 
+  @ApiProperty({
+    description: 'User name',
+    example: 'RonWizley'
+  })
   @Expose()
   public name: string;
 

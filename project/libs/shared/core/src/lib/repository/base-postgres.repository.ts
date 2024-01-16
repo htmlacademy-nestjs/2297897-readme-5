@@ -1,6 +1,6 @@
-import { DefaultPOJOType, Entity, EntityIdType } from "./entity.interface";
+import { DefaultPOJOType, Entity, EntityIdType } from './entity.interface';
 import { PrismaClientService } from '@project/libs/shared/posts/models';
-import { Repository } from "./repository.interface";
+import { Repository } from './repository.interface';
 
 export abstract class BasePostgresRepository<
   EntityType extends Entity<EntityIdType, DocumentType>,
@@ -20,7 +20,7 @@ export abstract class BasePostgresRepository<
     return this.createEntity(document);
   }
 
-  public async findById(id: EntityType["id"]): Promise<EntityType> {
+  public async findById(id: EntityType['id']): Promise<EntityType> {
     throw new Error('Not Implemented');
   }
 
@@ -28,11 +28,11 @@ export abstract class BasePostgresRepository<
     throw new Error('Not Implemented');
   }
 
-  public async update(id: EntityType["id"], entity: EntityType): Promise<EntityType> {
+  public async update(id: EntityType['id'], entity: EntityType): Promise<EntityType> {
     throw new Error('Not Implemented');
   }
 
-  public async deleteById(id: EntityType["id"]): Promise<void> {
+  public async deleteById(id: EntityType['id']): Promise<void> {
     throw new Error('Not Implemented');
   }
 }

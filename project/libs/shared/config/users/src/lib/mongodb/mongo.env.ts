@@ -1,6 +1,6 @@
-import { IsNumber, IsString, Max, Min, validateOrReject } from "class-validator";
-import { EnvValidationMessages } from "./mongo.messages";
-import { VALID_PORT } from "./mongo.const";
+import { IsNumber, IsString, Max, Min, validateOrReject } from 'class-validator';
+import { EnvValidationMessages } from './mongo.messages';
+import { VALID_PORT } from './mongo.const';
 
 export class MongoConfiguration {
   @IsString({message: EnvValidationMessages.DBNameRequired})

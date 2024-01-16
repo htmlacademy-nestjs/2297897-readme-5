@@ -1,4 +1,4 @@
-import { Tag } from "@project/libs/shared/types";
+import { Tag } from '@project/libs/shared/types';
 import { Entity } from '@project/libs/shared/core';
 
 export class PostTagEntity implements Tag, Entity<string, Tag>{
