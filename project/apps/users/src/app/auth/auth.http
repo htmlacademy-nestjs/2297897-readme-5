@@ -3,10 +3,10 @@ POST http://localhost:3333/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "RandyOrton",
-  "password": "Wrestler31337",
-  "avatarUrl": "uploads/avatars/Wrestler",
-  "email": "randyortoan@gmail.com"
+  "name": "Boo",
+  "password": "2123asd12312",
+  "avatarUrl": "uploads/avatars/food",
+  "email": "burger@gmail.com"
 }
 
 ###
