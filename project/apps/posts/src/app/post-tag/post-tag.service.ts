@@ -33,6 +33,21 @@ export class PostTagService {
     return this.postTagRepositoty.find();
   }
 
+  public async getPostTagsByIds(postTagsIds: string[]): Promise<PostTagEntity[]> {
+    const postTags = await this.postTagRepositoty.findByIds(postTagsIds);
+
+    if(postTagsIds.length !== postTags.length) {
+      const foundPostTagsIds = postTags.map((postTag) => postTag.id);
+      const notFoundPostTagsIds = postTagsIds.filter((id) => !foundPostTagsIds.includes(id));
+
+      if(notFoundPostTagsIds.length) {
+        throw new NotFoundException(`Tags with ids: ${notFoundPostTagsIds.join(', ')} not found`);
+      }
+    }
+
+    return postTags;
+  }
+
   public async updatePostTag(id: string, dto: UpdatePostTagDTO): Promise<PostTagEntity> {
     dto.title = dto.title.toLocaleLowerCase();
 

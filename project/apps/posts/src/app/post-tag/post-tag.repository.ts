@@ -31,6 +31,18 @@ export class PostTagRepository extends BasePostgresRepository<PostTagEntity, Tag
     return documents.map((document) => this.createEntityFromDocument(document));
   }
 
+  public async findByIds(ids: string[]): Promise<PostTagEntity[]> {
+    const records = await this.client.tag.findMany({
+      where: {
+        id: {
+          in: ids
+        }
+      }
+    });
+
+    return records.map((record) => this.createEntityFromDocument(record));
+  }
+
   public async save(entity: PostTagEntity): Promise<PostTagEntity> {
     const record = await this.client.tag.create({
       data: { ...entity.serialize() },

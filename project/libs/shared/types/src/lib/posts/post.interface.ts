@@ -20,11 +20,8 @@ export interface Post {
   originalPostId?: string;
   isReposted?: boolean;
 
-  likesCount: number;
-  likes: Like[],
-
-  commentsCount: number;
-  comments: Comment[],
+  likes: Like[];
+  comments: Comment[];
 
   title?: string;
   link?: string;

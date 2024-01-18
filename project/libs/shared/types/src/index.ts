@@ -8,3 +8,4 @@ export * from './lib/actions/like.interface';
 export * from './lib/posts/tag.interface';
 export * from './lib/paginations/sort-direction.enum';
 export * from './lib/paginations/pagination.interface';
+export * from './lib/posts/post-property.enum';

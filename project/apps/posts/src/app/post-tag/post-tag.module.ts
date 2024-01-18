@@ -8,5 +8,6 @@ import { PostTagController } from './post-tag.controller';
   imports: [PrismaClientModule],
   controllers: [PostTagController],
   providers: [PostTagRepository, PostTagService],
+  exports: [PostTagService]
 })
 export class PostTagModule { }
