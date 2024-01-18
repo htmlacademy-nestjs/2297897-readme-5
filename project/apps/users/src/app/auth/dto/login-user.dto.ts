@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { USER_VALIDATON_MESSAGE } from '../validation.messages';
+import { USER_VALIDATON_MESSAGE } from '../../user/validation.messages';
 import { IsEmail, IsString, MaxLength, MinLength } from 'class-validator';
 import { USER_AVAILABLE_VALUE } from '../../user/user.constant';
 

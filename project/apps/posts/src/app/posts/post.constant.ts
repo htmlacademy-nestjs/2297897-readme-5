@@ -22,4 +22,8 @@ export const POST_AVAILABLE_VALUE = {
   DESCRIPTION: {
     MAX_LENGTH: 300,
   },
+  TAGS: {
+    MIN_COUNT: 0,
+    MAX_COUNT: 8,
+  }
 } as const;

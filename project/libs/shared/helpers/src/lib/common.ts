@@ -19,6 +19,7 @@ export function fillDTO<T, V>(
 ): T | T[] {
   return plainToInstance(DtoClass, plainObject, {
     excludeExtraneousValues: true,
+    exposeUnsetFields: false,
     ...options
   });
 }

@@ -1,14 +1,25 @@
 import { PostType } from "@project/libs/shared/types";
 
 export const POST_VALIDATION_MESSAGE = {
-  USER_ID_NOT_VALID: 'User ID must be valid mongo ID',
-  TAGS_NOT_VALID: 'Tags must be valid UUID',
-  VIDEO_LINK_NOT_VALID: 'The link to the video must be a valid url',
-  LINK_NOT_VALID: 'The link must be a valid url',
-  POST_TYPE_NOT_VALID: `The type of post can be as follows: ${Object.values(PostType).join(', ')}`,
+  USER_ID: {
+    NOT_VALID: 'User ID must be valid mongo ID',
+  },
+  VIDEO_LINK: {
+    NOT_VALID: 'The link to the video must be a valid url',
+  },
+  LINK: {
+    NOT_VALID: 'The link must be a valid url',
+  },
+  POST_TYPE: {
+    NOT_VALID: `The type of post can be as follows: ${Object.values(PostType).join(', ')}`,
+  },
   TITLE: {
     MIN_LENGTH: 'Min title length is 20 chars',
     MAX_LENGTH: 'Max title length is 50 chars',
+  },
+  TAGS: {
+    NOT_VALID: 'Tags must be valid UUID',
+    COUNT_NOT_VALID: 'Max number of tags for one publication: 8',
   },
   ANNOUNCEMENT: {
     MIN_LENGTH: 'Min announcement length is 50 chars',

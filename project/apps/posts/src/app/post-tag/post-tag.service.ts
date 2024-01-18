@@ -11,6 +11,8 @@ export class PostTagService {
   ) { }
 
   public async createPostTag(dto: CreatePostTagDTO): Promise<PostTagEntity> {
+    dto.title = dto.title.toLocaleLowerCase();
+
     const existsPostTag = (await this.postTagRepositoty.find({ title: dto.title })).at(0);
 
     if (existsPostTag) {
@@ -32,6 +34,8 @@ export class PostTagService {
   }
 
   public async updatePostTag(id: string, dto: UpdatePostTagDTO): Promise<PostTagEntity> {
+    dto.title = dto.title.toLocaleLowerCase();
+
     const sameNamedTag = (await this.postTagRepositoty.find({ title: dto.title })).at(0);
 
     if (sameNamedTag) {

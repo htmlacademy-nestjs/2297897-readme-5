@@ -1,14 +1,9 @@
-import { User, PostType, Tag } from '@project/libs/shared/types';
-import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length } from 'class-validator';
+import { PostType, Tag } from '@project/libs/shared/types';
+import { IsEnum, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length } from 'class-validator';
 import { POST_AVAILABLE_VALUE } from '../post.constant';
 import { POST_VALIDATION_MESSAGE } from '../post.messages';
 
-export class CreatePostDTO {
-  @IsMongoId(
-    { message: POST_VALIDATION_MESSAGE.USER_ID.NOT_VALID },
-  )
-  public userId: User['id'];
-
+export class UpdatePostDTO {
   @IsOptional()
   @IsUUID(
     'all',
@@ -24,6 +19,7 @@ export class CreatePostDTO {
   )
   public tags: Tag['id'][];
 
+  @IsOptional()
   @IsEnum(
     PostType,
     { message: POST_VALIDATION_MESSAGE.POST_TYPE.NOT_VALID },
@@ -31,6 +27,7 @@ export class CreatePostDTO {
   public postType: PostType;
 
   @ValidateIf(current => current.postType === PostType.Video || current.postType === PostType.Text)
+  @IsOptional()
   @MinLength(
     POST_AVAILABLE_VALUE.TITLE.MIN_LENGTH,
     { message: POST_VALIDATION_MESSAGE.TITLE.MIN_LENGTH },
@@ -42,6 +39,7 @@ export class CreatePostDTO {
   public title: string;
 
   @ValidateIf(current => current.postType === PostType.Video)
+  @IsOptional()
   @IsUrl(
     {},
     { message: POST_VALIDATION_MESSAGE.VIDEO_LINK.NOT_VALID },
@@ -49,6 +47,7 @@ export class CreatePostDTO {
   public videoLink?: string;
 
   @ValidateIf(current => current.postType === PostType.Text)
+  @IsOptional()
   @MinLength(
     POST_AVAILABLE_VALUE.ANNOUNCEMENT.MIN_LENGTH,
     { message: POST_VALIDATION_MESSAGE.ANNOUNCEMENT.MIN_LENGTH },
@@ -60,6 +59,7 @@ export class CreatePostDTO {
   public announcement?: string;
 
   @ValidateIf(current => current.postType === PostType.Text)
+  @IsOptional()
   @MinLength(
     POST_AVAILABLE_VALUE.POST_TEXT.MIN_LENGTH,
     { message: POST_VALIDATION_MESSAGE.POST_TEXT.MIN_LENGTH },
@@ -71,6 +71,7 @@ export class CreatePostDTO {
   public postText?: string;
 
   @ValidateIf(current => current.postType === PostType.Link)
+  @IsOptional()
   @IsUrl(
     {},
     { message: POST_VALIDATION_MESSAGE.LINK.NOT_VALID },
@@ -86,10 +87,12 @@ export class CreatePostDTO {
   public description?: string;
 
   @ValidateIf(current => current.postType === PostType.Photo)
-  @IsMimeType() //TODO: Разобраться с допустимыми размерами (1Мб) и доступными форматами изображений (jpg, png)
+  @IsOptional()
+  @IsMimeType()
   public photoUrl?: string;
 
   @ValidateIf(current => current.postType === PostType.Quote)
+  @IsOptional()
   @MinLength(
     POST_AVAILABLE_VALUE.QUOTE_TEXT.MIN_LENGTH,
     { message: POST_VALIDATION_MESSAGE.QUOTE_TEXT.MIN_LENGTH },
@@ -101,6 +104,7 @@ export class CreatePostDTO {
   public quoteText?: string;
 
   @ValidateIf(current => current.postType === PostType.Quote)
+  @IsOptional()
   @MinLength(
     POST_AVAILABLE_VALUE.QUOTE_AUTHOR.MIN_LENGTH,
     { message: POST_VALIDATION_MESSAGE.QUOTE_AUTHOR.MIN_LENGTH },
