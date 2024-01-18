@@ -1,8 +1,9 @@
 import { Like } from '../actions/like.interface';
-import { Tag } from '../actions/tag.interface';
+import { Tag } from './tag.interface';
 import { User } from '../users/user.interface';
 import { PostState } from './post-state.enum';
 import { PostType } from './post-type.enum';
+import { Comment } from '../actions/comment.interface';
 
 export interface Post {
   id?: string;

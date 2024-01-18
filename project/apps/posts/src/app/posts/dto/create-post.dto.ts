@@ -1,7 +1,7 @@
 import { User, PostType, Tag } from '@project/libs/shared/types';
 import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length } from 'class-validator';
 import { POST_AVAILABLE_VALUE } from '../post.constant';
-import { POST_VALIDATION_MESSAGE } from '../post.messages';
+import { POST_VALIDATION_MESSAGE } from '../post.message';
 
 export class CreatePostDTO {
   @IsMongoId(

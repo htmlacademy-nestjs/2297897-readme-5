@@ -1,4 +1,4 @@
-export const EnvValidationMessages = {
+export const EnvValidationMessage = {
   DBHostRequired: 'MongoDB host is required',
   DBNameRequired: 'Database name is required',
   DBPortRequired: 'MongoDB port is required',
