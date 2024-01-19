@@ -1,5 +1,5 @@
-export interface PaginationInterface<T> {
-  entity: T[];
+export interface PaginationResult<T> {
+  entities: T[];
   totalPages: number;
   totalItems: number;
   currentPage: number;
