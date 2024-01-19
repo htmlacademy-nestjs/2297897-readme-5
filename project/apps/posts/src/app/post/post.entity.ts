@@ -1,8 +1,8 @@
-import { Entity, EntityIdType } from "@project/libs/shared/core";
-import { Like, Post, PostState, PostType, Tag, User, Comment, PostProperty } from "@project/libs/shared/types";
-import { PostTagEntity } from "../post-tag/post-tag.entity";
-import { POST_AVAILABLE_VALUE } from "./post.constant";
-import { CreatePostDTO } from "./dto/create-post.dto";
+import { Entity, EntityIdType } from '@project/libs/shared/core';
+import { Like, Post, PostState, PostType, User, Comment, PostProperty } from '@project/libs/shared/types';
+import { PostTagEntity } from '../post-tag/post-tag.entity';
+import { POST_AVAILABLE_VALUE } from './post.constant';
+import { CreatePostDTO } from './dto/create-post.dto';
 
 export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public id?: string;
@@ -15,9 +15,9 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public updatedAt?: Date;
   public publishDate?: Date;
 
+  public isReposted: boolean;
   public creatorUserId?: User['id'];
   public originalPostId?: string;
-  public isReposted?: boolean;
 
   public likes: Like[];       //  | LikeEntity[]     |
   public comments: Comment[]; //  | CommentEntity[]  |
@@ -52,8 +52,8 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
     this.creatorUserId = data.creatorUserId ?? undefined;
     this.originalPostId = data.originalPostId ?? undefined;
     this.isReposted = data.isReposted ?? undefined;
-    this.likes = []; //Временное решение
-    this.comments = [];  //Временное решение
+    this.likes = [];
+    this.comments = [];
     this.title = data.title ?? undefined;
     this.link = data.link ?? undefined;
     this.description = data.description ?? undefined;
@@ -78,15 +78,15 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
       tags: this.tags,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
+      isReposted: this.isReposted,
       publishDate: this.publishDate,
-      comments: [], //Временное решение
-      likes: [], //Временное решение
+      comments: [],
+      likes: [],
     };
 
     if(this.isReposted) {
       serializedPost['creatorUserId'] = this.creatorUserId;
       serializedPost['originalPostId'] = this.originalPostId;
-      serializedPost['isReposted'] = this.isReposted;
     }
 
     for(const property of filteredProperties) {

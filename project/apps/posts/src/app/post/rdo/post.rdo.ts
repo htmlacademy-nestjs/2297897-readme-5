@@ -1,6 +1,6 @@
-import { PostState, PostType, Tag } from "@project/libs/shared/types";
-import { Expose, Type } from "class-transformer";
-import { PostTagRDO } from "../../post-tag/rdo/post-tag.rdo";
+import { PostState, PostType, Tag } from '@project/libs/shared/types';
+import { Expose, Type } from 'class-transformer';
+import { PostTagRDO } from '../../post-tag/rdo/post-tag.rdo';
 
 export class PostRDO {
   @Expose()

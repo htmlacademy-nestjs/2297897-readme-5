@@ -1,4 +1,4 @@
-import { PostProperty, PostType } from "@project/libs/shared/types";
+import { PostProperty, PostType } from '@project/libs/shared/types';
 
 export const POST_AVAILABLE_VALUE = {
   TITLE: {

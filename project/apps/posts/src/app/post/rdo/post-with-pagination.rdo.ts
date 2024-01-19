@@ -1,6 +1,6 @@
-import { PaginationInterface } from "@project/libs/shared/types";
-import { PostRDO } from "./post.rdo";
-import { Expose } from "class-transformer";
+import { PaginationInterface } from '@project/libs/shared/types';
+import { PostRDO } from './post.rdo';
+import { Expose } from 'class-transformer';
 
 export class PostWithPaginationRDO implements PaginationInterface<PostRDO> {
   @Expose()

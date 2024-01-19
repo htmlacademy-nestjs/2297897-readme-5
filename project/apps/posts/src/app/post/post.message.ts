@@ -1,4 +1,4 @@
-import { PostType } from "@project/libs/shared/types";
+import { PostType } from '@project/libs/shared/types';
 
 export const POST_VALIDATION_MESSAGE = {
   USER_ID: {

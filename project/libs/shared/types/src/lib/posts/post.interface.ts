@@ -4,6 +4,7 @@ import { User } from '../users/user.interface';
 import { PostState } from './post-state.enum';
 import { PostType } from './post-type.enum';
 import { Comment } from '../actions/comment.interface';
+import { $Enums } from '@prisma/client';
 
 export interface Post {
   id?: string;
