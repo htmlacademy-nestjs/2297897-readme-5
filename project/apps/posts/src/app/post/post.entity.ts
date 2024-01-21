@@ -75,7 +75,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
       userId: this.userId,
       postType: this.postType,
       postState: this.postState,
-      tags: this.tags,
+      tags: this.tags.map((tag) => tag.serialize()),
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       isReposted: this.isReposted,

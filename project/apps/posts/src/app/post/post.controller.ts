@@ -14,7 +14,7 @@ export class PostController {
   ) { }
 
   @Get('/')
-  public async index(@Query() query?: PostQuery): Promise<PostWithPaginationRDO> {
+  public async index(@Query() query: PostQuery): Promise<PostWithPaginationRDO> {
     const postsWithPagination = await this.postService.getAllPosts(query);
     const result = {
       ...postsWithPagination,

@@ -11,7 +11,7 @@ export class PostRDO {
 
   @Expose()
   @Type(() => PostTagRDO)
-  public tags: Tag[];
+  public tags: PostTagRDO[];
 
   @Expose()
   public postType: PostType;

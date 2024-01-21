@@ -1,5 +1,5 @@
 import { User, PostType, Tag } from '@project/libs/shared/types';
-import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length } from 'class-validator';
+import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length, ArrayMinSize, ArrayMaxSize } from 'class-validator';
 import { POST_AVAILABLE_VALUE } from '../post.constant';
 import { POST_VALIDATION_MESSAGE } from '../post.message';
 
@@ -17,8 +17,7 @@ export class CreatePostDTO {
       message: POST_VALIDATION_MESSAGE.TAGS.NOT_VALID,
     }
   )
-  @Length(
-    POST_AVAILABLE_VALUE.TAGS.MIN_COUNT,
+  @ArrayMaxSize(
     POST_AVAILABLE_VALUE.TAGS.MAX_COUNT,
     { message: POST_VALIDATION_MESSAGE.TAGS.COUNT_NOT_VALID }
   )
