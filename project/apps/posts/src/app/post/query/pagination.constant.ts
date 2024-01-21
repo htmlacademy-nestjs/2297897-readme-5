@@ -1,4 +1,4 @@
-import { SortDirection } from "@project/libs/shared/types";
+import { SortDirection } from '@project/libs/shared/types';
 
 export const PAGINATION_DEFAULT_VALUE = {
     POST_COUNT_LIMIT: 10,

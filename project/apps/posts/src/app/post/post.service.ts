@@ -1,21 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PostRepository } from './post.repository';
-import { PostTagRepository } from '../post-tag/post-tag.repository';
 import { CreatePostDTO } from './dto/create-post.dto';
 import { PostEntity } from './post.entity';
 import { PostQuery } from './query/post.query';
 import { PaginationResult } from '@project/libs/shared/types';
 import { UpdatePostDTO } from './dto/update-post.dto';
+import { PostTagService } from '../post-tag/post-tag.service';
 
 @Injectable()
 export class PostService {
   constructor(
     private readonly postRepository: PostRepository,
-    private readonly postTagRepository: PostTagRepository,
+    private readonly postTagService: PostTagService,
   ) { }
 
   public async createPost(dto: CreatePostDTO): Promise<PostEntity> {
-    const postTags = await this.postTagRepository.findByIds(dto.tags);
+    const postTags = await this.postTagService.getPostTagsByIds(dto.tags);
     return this.postRepository.save(PostEntity.fromDto(dto, postTags));
   }
 
@@ -44,7 +44,7 @@ export class PostService {
       }
 
       if (!isSameTags) {
-        existsPost.tags = await this.postTagRepository.findByIds(dto.tags)
+        existsPost.tags = await this.postTagService.getPostTagsByIds(dto.tags)
       }
 
       if (isSameTags && !hasChanges) {
