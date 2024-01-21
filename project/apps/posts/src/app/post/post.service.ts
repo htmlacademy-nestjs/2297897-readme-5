@@ -19,6 +19,10 @@ export class PostService {
     return this.postRepository.save(PostEntity.fromDto(dto, postTags));
   }
 
+  public async getPost(id: string): Promise<PostEntity> {
+    return this.postRepository.findById(id);
+  }
+
   public async getAllPosts(query?: PostQuery): Promise<PaginationResult<PostEntity>> {
     return this.postRepository.find(query);
   }
