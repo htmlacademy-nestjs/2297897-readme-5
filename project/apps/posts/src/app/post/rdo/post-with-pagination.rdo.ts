@@ -1,10 +1,10 @@
-import { PaginationInterface } from '@project/libs/shared/types';
+import { PaginationResult } from '@project/libs/shared/types';
 import { PostRDO } from './post.rdo';
 import { Expose } from 'class-transformer';
 
-export class PostWithPaginationRDO implements PaginationInterface<PostRDO> {
+export class PostWithPaginationRDO implements PaginationResult<PostRDO> {
   @Expose()
-  public entity: PostRDO[];
+  public entities: PostRDO[];
 
   @Expose()
   public totalItems: number;
