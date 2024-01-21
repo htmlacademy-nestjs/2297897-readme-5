@@ -63,35 +63,3 @@ export class PostService {
     }
   }
 }
-
-
-
-
-
-
-
-//const existsPost = await this.postRepository.findById(id);
-//let isSameTags = true;
-//let hasChanges = false;
-//
-//for (const [key, value] of Object.entries(dto)) {
-//  if(value !== 'undefined' && key !== 'tags' && existsPost[key] !== value) {
-//    existsPost[key] = value;
-//    hasChanges = true;
-//  }
-//
-//  if(key === 'tags' && value) {
-//    const currentTagsIds = await this.postTagRepository.findByIds(existsPost.tags.map((tag) => tag.id));
-//    isSameTags = currentTagsIds.length === value.length && currentTagsIds.every((postTag) => value.includes(postTag.id));
-//
-//    if(!isSameTags) {
-//      existsPost.tags = await this.postTagRepository.findByIds(dto.tags);
-//    }
-//  }
-//}
-//
-//if(isSameTags && !hasChanges) {
-//  return existsPost;
-//}
-//
-//return this.postRepository.update(id, existsPost);
