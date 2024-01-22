@@ -47,7 +47,6 @@ export class AuthController {
     return fillDTO(LoggedUserRDO, verifiedUser.serialize());
   }
 
-  //TODO: Добавить кейс NOT_FOUND
   @ApiResponse({
     type: UserRDO,
     status: HttpStatus.OK,
@@ -58,5 +57,4 @@ export class AuthController {
     const existUser = await this.authService.getUser(id);
     return fillDTO(UserRDO, existUser.serialize());
   }
-
 }
