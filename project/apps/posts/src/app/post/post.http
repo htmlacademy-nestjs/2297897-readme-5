@@ -1,10 +1,10 @@
 #Get all posts
-GET http://localhost:7000/api/posts/ HTTP/1.1
+GET http://localhost:4000/api/posts/ HTTP/1.1
 
 ###
 
 #Create new Post
-POST http://localhost:7000/api/posts HTTP/1.1
+POST http://localhost:4000/api/posts HTTP/1.1
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 
 #CASE: The client passed a field that is not specific to the post
-POST http://localhost:7000/api/posts HTTP/1.1
+POST http://localhost:4000/api/posts HTTP/1.1
 Content-Type: application/json
 
 {
@@ -34,20 +34,20 @@ Content-Type: application/json
 ###
 
 #Get post by ID
-GET http://localhost:7000/api/posts/2b8342e0-f9ef-4424-beee-d99021f8ad63 HTTP/1.1
+GET http://localhost:4000/api/posts/9e3c1668-cf8e-4362-b73c-7db26797826b HTTP/1.1
 
 ###
 
 #Update post by ID
-PATCH  http://localhost:7000/api/posts/2b8342e0-f9ef-4424-beee-d99021f8ad63 HTTP/1.1
+PATCH  http://localhost:4000/api/posts/9e3c1668-cf8e-4362-b73c-7db26797826b HTTP/1.1
 Content-Type: application/json
 
 {
-  "postType": "quote"
+  "description": "quo vadis"
 }
 ###
 
 #Delete post by ID
-DELETE http://localhost:7000/api/posts/afb5d04f-ef3d-4424-85ed-f27a179923ec HTTP/1.1
+DELETE http://localhost:4000/api/posts/9e3c1668-cf8e-4362-b73c-7db26797826b HTTP/1.1
 
 ###
