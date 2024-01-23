@@ -34,6 +34,10 @@ export class PostTagService {
   }
 
   public async getPostTagsByIds(postTagsIds: string[]): Promise<PostTagEntity[]> {
+    if(!postTagsIds) {
+      return [];
+    }
+
     const postTags = await this.postTagRepository.findByIds(postTagsIds);
 
     if(postTagsIds.length !== postTags.length) {

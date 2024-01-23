@@ -3,6 +3,7 @@ import { Like, Post, PostState, PostType, User, Comment, PostProperty } from '@p
 import { PostTagEntity } from '../post-tag/post-tag.entity';
 import { POST_AVAILABLE_VALUE } from './post.constant';
 import { CreatePostDTO } from './dto/create-post.dto';
+import { PostCommentEntity } from '../post-comment/post-comment.entity';
 
 export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public id?: string;
@@ -20,7 +21,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public originalPostId?: string;
 
   public likes: Like[];       //  | LikeEntity[]     |
-  public comments: Comment[]; //  | CommentEntity[]  |
+  public comments: PostCommentEntity[];
 
   public title?: string;
   public link?: string;
@@ -41,28 +42,28 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
   }
 
   public populate(data: Post) {
-    this.id = data.id ?? undefined;
+    this.id = data.id;
     this.userId = data.userId;
     this.postType = data.postType;
-    this.postState = data.postState ?? undefined;
+    this.postState = data.postState;
     this.tags = data.tags.map((tag) => PostTagEntity.fromObject(tag));
-    this.createdAt = data.createdAt ?? undefined;
-    this.updatedAt = data.updatedAt ?? undefined;
-    this.publishDate = data.publishDate ?? undefined;
-    this.creatorUserId = data.creatorUserId ?? undefined;
-    this.originalPostId = data.originalPostId ?? undefined;
-    this.isReposted = data.isReposted ?? undefined;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
+    this.publishDate = data.publishDate;
+    this.creatorUserId = data.creatorUserId;
+    this.originalPostId = data.originalPostId;
+    this.isReposted = data.isReposted;
     this.likes = [];
-    this.comments = [];
-    this.title = data.title ?? undefined;
-    this.link = data.link ?? undefined;
-    this.description = data.description ?? undefined;
-    this.photoUrl = data.photoUrl ?? undefined;
-    this.quoteText = data.quoteText ?? undefined;
-    this.quoteAuthor = data.quoteAuthor ?? undefined;
-    this.announcement = data.announcement ?? undefined;
-    this.postText = data.postText ?? undefined;
-    this.videoLink = data.videoLink ?? undefined;
+    this.comments = data.comments.map((comment) => PostCommentEntity.fromObject(comment));
+    this.title = data.title;
+    this.link = data.link;
+    this.description = data.description;
+    this.photoUrl = data.photoUrl;
+    this.quoteText = data.quoteText;
+    this.quoteAuthor = data.quoteAuthor;
+    this.announcement = data.announcement;
+    this.postText = data.postText;
+    this.videoLink = data.videoLink;
 
     this.excludeRelatedFields();
     return this;
@@ -80,7 +81,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
       updatedAt: this.updatedAt,
       isReposted: this.isReposted,
       publishDate: this.publishDate,
-      comments: [],
+      comments: this.comments?.map((comment) => comment.serialize()) ?? [],
       likes: [],
     };
 

@@ -16,10 +16,10 @@ export class PostTagEntity implements Tag, Entity<string, Tag>{
   }
 
   public populate(data: Tag): void {
-    this.id = data.id ?? undefined;
+    this.id = data.id;
     this.title = data.title;
-    this.createdAt = data.createdAt ?? undefined;
-    this.updatedAt = data.updatedAt ?? undefined;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
   }
 
   public serialize(): Tag {
