@@ -1,11 +1,6 @@
 import { registerAs } from '@nestjs/config';
+import { Environment } from '@project/libs/shared/types';
 import * as Joi from 'joi';
-
-enum Environment {
-  Development = 'development',
-  Production = 'production',
-  Stage = 'stage',
-};
 
 type ApplicationConfig = {
   environment: Environment,
