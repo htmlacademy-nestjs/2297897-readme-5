@@ -1,6 +1,6 @@
-import { Entity, EntityIdType } from "@project/libs/shared/core";
-import { Comment } from "@project/libs/shared/types";
-import { CreatePostCommentDTO } from "./dto/create-post-comment.dto";
+import { Entity, EntityIdType } from '@project/libs/shared/core';
+import { Comment } from '@project/libs/shared/types';
+import { CreatePostCommentDTO } from './dto/create-post-comment.dto';
 
 export class PostCommentEntity implements Comment, Entity<EntityIdType, Comment> {
   public id?: string;
