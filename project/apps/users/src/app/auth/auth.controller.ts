@@ -6,6 +6,7 @@ import { LoginUserDTO } from './dto/login-user.dto';
 import { UserRDO } from './rdo/user.rdo';
 import { LoggedUserRDO } from './rdo/logged-user.rdo';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { MongoIDValidationPipe } from '@project/libs/shared/core';
 
 @ApiTags('authentication')
 @Controller('auth')
@@ -53,7 +54,7 @@ export class AuthController {
     description: 'User founded.'
   })
   @Get(':id')
-  public async show(@Param('id') id: string) {
+  public async show(@Param('id', MongoIDValidationPipe) id: string) {
     const existUser = await this.authService.getUser(id);
     return fillDTO(UserRDO, existUser.serialize());
   }
