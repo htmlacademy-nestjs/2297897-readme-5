@@ -4,6 +4,7 @@ import { ConfigType } from '@nestjs/config';
 import { FileVaultConfig } from '@project/libs/shared/config/file-vault';
 import { join } from 'node:path';
 import {ensureDir, writeFile} from 'fs-extra'
+import dayjs from 'dayjs';
 
 @Injectable()
 export class FileUploaderService {
@@ -15,7 +16,8 @@ export class FileUploaderService {
   ) {}
 
   private getUploadDirectoryPath(): string {
-    return this.config.uploadDirectory;
+    const [year, month] = dayjs().format('YYYY MM').split(' ');
+    return join(this.config.uploadDirectory, year, month);
   }
 
   private getDestinationFilePath(filename: string): string {
