@@ -1,4 +1,0 @@
-#Get all posts (WIP)
-GET http://localhost:7000/api HTTP/1.1
-
-###

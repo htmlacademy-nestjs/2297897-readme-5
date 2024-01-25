@@ -1,0 +1,8 @@
+export const MAX_COMMENTS_COUNT = 50;
+export const POST_COMMENT_AVAILABLE_VALUE = {
+  MAX_COMMENTS_COUNT: 50,
+  MESSAGE: {
+    MIN_LENGTH: 10,
+    MAX_LENGTH: 300,
+  }
+} as const;

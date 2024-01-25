@@ -1,5 +1,3 @@
-import { Post } from "../posts/post.interface";
-
 export interface Like {
   id: string;
   postId?: string;

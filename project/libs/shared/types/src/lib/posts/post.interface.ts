@@ -1,8 +1,10 @@
 import { Like } from '../actions/like.interface';
-import { Tag } from '../actions/tag.interface';
+import { Tag } from './tag.interface';
 import { User } from '../users/user.interface';
 import { PostState } from './post-state.enum';
 import { PostType } from './post-type.enum';
+import { Comment } from '../actions/comment.interface';
+import { $Enums } from '@prisma/client';
 
 export interface Post {
   id?: string;
@@ -19,11 +21,8 @@ export interface Post {
   originalPostId?: string;
   isReposted?: boolean;
 
-  likesCount: number;
-  likes: Like[],
-
-  commentsCount: number;
-  comments: Comment[],
+  likes: Like[];
+  comments: Comment[];
 
   title?: string;
   link?: string;

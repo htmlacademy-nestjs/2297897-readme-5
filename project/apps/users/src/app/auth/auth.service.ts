@@ -1,14 +1,23 @@
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException, HttpException, HttpStatus,
+  Injectable, Logger, NotFoundException,
+  UnauthorizedException
+} from '@nestjs/common';
 import { UserRepository } from '../user/user.repository';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserEntity } from '../user/user.entity';
-import { AuthErrorMessage } from './auth.messages';
+import { AUTH_ERROR_MESSAGE } from './auth.messages';
 import { LoginUserDTO } from './dto/login-user.dto';
+import { JwtService } from '@nestjs/jwt';
+import { Token, TokenPayload, User } from '@project/libs/shared/types';
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private readonly userRepository: UserRepository,
+    private readonly jwtService: JwtService,
   ) { }
 
   public async register(dto: CreateUserDTO): Promise<UserEntity> {
@@ -17,7 +26,7 @@ export class AuthService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (existUser) {
-      throw new ConflictException(AuthErrorMessage.USER_EXISTS_CONFLICT);
+      throw new ConflictException(AUTH_ERROR_MESSAGE.USER_EXISTS_CONFLICT);
     }
 
     const userEntity = await new UserEntity({
@@ -35,11 +44,11 @@ export class AuthService {
     const existUser = await this.userRepository.findByEmail(email);
 
     if (!existUser) {
-      throw new NotFoundException(AuthErrorMessage.USER_NOT_EXISTS);
+      throw new NotFoundException(AUTH_ERROR_MESSAGE.USER_NOT_EXISTS);
     }
 
     if (! await existUser.comparePassword(password)) {
-      throw new UnauthorizedException(AuthErrorMessage.WRONG_PASSWORD);
+      throw new UnauthorizedException(AUTH_ERROR_MESSAGE.WRONG_PASSWORD);
     }
 
     return existUser;
@@ -53,5 +62,22 @@ export class AuthService {
     }
 
     return existsUser;
+  }
+
+  public async createUserToken(user: User): Promise<Token> {
+    const tokenPayload: TokenPayload = {
+      sub: user.id,
+      email: user.email,
+      name: user.name,
+      avatarUrl: user.avatarUrl
+    }
+
+    try {
+      const accessToken = await this.jwtService.signAsync(tokenPayload);
+      return { accessToken };
+    } catch(error) {
+      this.logger.error(`[Token generation error]: ${error.message}`);
+      throw new HttpException('An error occurred during token creation', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
