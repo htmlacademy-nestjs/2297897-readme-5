@@ -13,6 +13,10 @@ import { SERVE_ROOT } from './file-uploader.const';
       return [{
         rootPath,
         serveRoot: SERVE_ROOT,
+        serveStaticOptions: {
+          etag: true,
+          fallthrough: true,
+        }
       }]
     }
   })],
