@@ -1,4 +1,8 @@
-# Upload some file
+#Get file
+GET http://localhost:3335/api/files/65b3b82a32c5253045bcda13
+###
+
+#Upload file
 POST http://localhost:3335/api/files/upload HTTP/1.1
 Content-Type: multipart/form-data; boundary=boundary
 
