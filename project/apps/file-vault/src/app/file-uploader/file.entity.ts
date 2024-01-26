@@ -1,7 +1,7 @@
 import { Entity } from '@project/libs/shared/core';
 import { File } from '@project/libs/shared/types';
 
-export class FileEntity implements File, Entity<string, File> {
+export class FileEntity implements File, Entity<string> {
   public id?: string;
   public originalName: string;
   public size: number;
@@ -13,7 +13,7 @@ export class FileEntity implements File, Entity<string, File> {
   public subDirectory: string;
 
 
-  public populate(data: File) {
+  public populate(data: File): FileEntity {
     this.id = data.id;
     this.originalName = data.originalName;
     this.size = data.size;
@@ -27,7 +27,7 @@ export class FileEntity implements File, Entity<string, File> {
     return this;
   }
 
-  public serialize(): File {
+  public serialize() {
     return {
       id: this.id,
       originalName: this.originalName,
