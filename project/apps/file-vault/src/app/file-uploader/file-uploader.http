@@ -1,5 +1,5 @@
 #Get file
-GET http://localhost:3335/api/files/65b3b82a32c5253045bcda13
+GET http://localhost:3335/api/files/65b66b2bdc5fd73904822866
 ###
 
 #Upload file

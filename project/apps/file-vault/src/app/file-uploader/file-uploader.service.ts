@@ -28,11 +28,12 @@ export class FileUploaderService {
 
   private getSubUploadDirectoryPath() {
     const [year, month] = dayjs().format(this.DATE_FORMAT).split(' ');
-    return join(year, month);
+    return join(year, month).replace(/\\/g, '/');
   }
 
   private getDestinationFilePath(filename: string): string {
-    return join(this.getUploadDirectoryPath(), this.getSubUploadDirectoryPath(), filename);
+    return join(this.getUploadDirectoryPath(), this.getSubUploadDirectoryPath(), filename)
+      .replace(/\\/g, '/');
   }
 
   public async writeFile(file: Express.Multer.File): Promise<StoredFile> {
