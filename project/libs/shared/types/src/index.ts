@@ -14,3 +14,4 @@ export * from './lib/app/token-payload.interface';
 export * from './lib/app/token.interface';
 export * from './lib/file-vault/file.interface';
 export * from './lib/file-vault/stored-file.interface';
+export * from './lib/notify/subscriber.interface';
