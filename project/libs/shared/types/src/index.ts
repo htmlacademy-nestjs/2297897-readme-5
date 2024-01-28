@@ -15,3 +15,4 @@ export * from './lib/app/token.interface';
 export * from './lib/file-vault/file.interface';
 export * from './lib/file-vault/stored-file.interface';
 export * from './lib/notify/subscriber.interface';
+export * from './lib/notify/rabbit-routing.enum';
