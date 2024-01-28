@@ -35,3 +35,7 @@ export function isPostType (value: unknown): asserts value is PostType {
     throw new TypeError(`${value} is not valid post type`);
   }
 }
+
+export function getRabbitMQConnectionString({user, password, host, port}) {
+  return `amqp://${user}:${password}@${host}:${port}`;
+}
