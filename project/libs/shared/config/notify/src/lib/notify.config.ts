@@ -25,7 +25,7 @@ export interface NotifyConfig {
 
 
 const validationSchema = Joi.object({
-  environment: Joi.string().valid(Object.values(Environment)).required(),
+  environment: Joi.string().valid(...Object.values(Environment)).required(),
   port: Joi.number().port().required(),
   db: Joi.object({
     host: Joi.string().required(),
@@ -73,7 +73,7 @@ function getConfig(): NotifyConfig {
       exchange: process.env.RABBIT_EXCHANGE,
     },
   };
-
+  console.log(config);
   validateConfig(config);
   return config;
 }
