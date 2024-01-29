@@ -28,7 +28,7 @@ const validationSchema = Joi.object({
   environment: Joi.string().valid(...Object.values(Environment)).required(),
   port: Joi.number().port().required(),
   db: Joi.object({
-    host: Joi.string().required(),
+    host: Joi.string().hostname().required(),
     port: Joi.number().port().required(),
     user: Joi.string().required(),
     name: Joi.string().required(),
@@ -36,7 +36,7 @@ const validationSchema = Joi.object({
     authBase: Joi.string().required(),
   }),
   rabbit: Joi.object({
-    host: Joi.string().required(),
+    host: Joi.string().hostname().required(),
     port: Joi.number().port().required(),
     user: Joi.string().required(),
     password: Joi.string().required(),
@@ -45,8 +45,8 @@ const validationSchema = Joi.object({
   })
 });
 
-function validateConfig (config: NotifyConfig) {
-  const {error} = validationSchema.validate(config);
+function validateConfig(config: NotifyConfig) {
+  const { error } = validationSchema.validate(config, { abortEarly: true });
   if (error) {
     throw new Error(`[Notify Config Validation Error]: ${error.message}`);
   }
