@@ -13,6 +13,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Token, TokenPayload, User } from '@project/libs/shared/types';
 import { jwtConfig } from '@project/libs/shared/config/users';
 import { ConfigType } from '@nestjs/config';
+import { RefreshTokenService } from '../refresh-token/refresh-token.service';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,8 @@ export class AuthService {
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
     @Inject(jwtConfig.KEY)
-    private readonly jwtOptions: ConfigType<typeof jwtConfig>
+    private readonly jwtOptions: ConfigType<typeof jwtConfig>,
+    private readonly refreshTokenService: RefreshTokenService,
   ) { }
 
   public async register(dto: CreateUserDTO): Promise<UserEntity> {
@@ -80,24 +82,36 @@ export class AuthService {
   }
 
   public async createUserToken(user: User): Promise<Token> {
-    const tokenPayload: TokenPayload = {
+    const accessTokenPayload: TokenPayload = {
       sub: user.id,
       email: user.email,
       name: user.name,
       avatarUrl: user.avatarUrl
-    }
+    };
+    const refreshTokenPayload = { ...accessTokenPayload, tokenId: crypto.randomUUID() };
+    this.refreshTokenService.createRefreshSession(refreshTokenPayload);
 
     try {
-      const accessToken = await this.jwtService.signAsync(tokenPayload);
-      const refreshToken = await this.jwtService.signAsync(tokenPayload, {
-        secret: this.jwtOptions.refreshTokenSecret,
-        expiresIn: this.jwtOptions.refreshTokenExpiresIn,
-      });
+      const [accessToken, refreshToken] = await Promise.all([
+        this.generateAccessToken(accessTokenPayload),
+        this.generateRefreshToken(refreshTokenPayload),
+      ]);
 
       return { accessToken, refreshToken };
     } catch(error) {
       this.logger.error(`[Token generation error]: ${error.message}`);
       throw new HttpException('An error occurred during token creation', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  public async generateAccessToken(payload: TokenPayload): Promise<string> {
+    return this.jwtService.signAsync(payload);
+  }
+
+  public async generateRefreshToken(payload: TokenPayload): Promise<string> {
+    return this.jwtService.signAsync(payload, {
+      secret: this.jwtOptions.refreshTokenSecret,
+      expiresIn: this.jwtOptions.refreshTokenExpiresIn,
+    });
   }
 }
