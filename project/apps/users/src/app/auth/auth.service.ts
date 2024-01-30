@@ -69,6 +69,16 @@ export class AuthService {
     return existsUser;
   }
 
+  public async getUserByEmail(email: string) {
+    const existsUser = await this.userRepository.findByEmail(email);
+
+    if(!existsUser) {
+      throw new NotFoundException(`User with email ${email} not found`);
+    }
+
+    return existsUser;
+  }
+
   public async createUserToken(user: User): Promise<Token> {
     const tokenPayload: TokenPayload = {
       sub: user.id,

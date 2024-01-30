@@ -8,6 +8,7 @@ import { getJWTOptions } from '@project/libs/shared/config/users';
 import { JWTAccessStrategy } from './strategies/jwt-access.strategy';
 import { NotifyModule } from '../notify/notify.module';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JWTRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { LocalStrategy } from './strategies/local.strategy';
   providers: [
     AuthService,
     JWTAccessStrategy,
+    JWTRefreshStrategy,
     LocalStrategy
   ],
 })
