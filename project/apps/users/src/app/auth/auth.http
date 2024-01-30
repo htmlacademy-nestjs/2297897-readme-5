@@ -12,7 +12,7 @@ Content-Type: application/json
 ###
 
 #Authorize user by email and password
-POST http://localhost:3333/api/auth/login HTTP/1.1
+POST http://localhost:4546/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
