@@ -12,9 +12,9 @@ const validationSchema = Joi.object({
 });
 
 function validateConfig(config: JWTConfig): void {
-  const {error} = validationSchema.validate(config);
+  const { error } = validationSchema.validate(config, { abortEarly: true });
 
-  if(error) {
+  if (error) {
     throw new Error(`[Authentication config validation error]: ${error}`);
   }
 }
