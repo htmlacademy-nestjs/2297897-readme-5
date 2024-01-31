@@ -16,5 +16,5 @@
   ],
   "include": [
     "src/**/*.ts"
-, "../api-gateway/src/app/dto/create-user.dto.ts"  ]
+, "../api-gateway/src/app/dto/create-user.dto.ts", "../api-gateway/src/app/dto/change-password.dto copy.ts"  ]
 }

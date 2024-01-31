@@ -1,10 +1,11 @@
-import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { LoginUserDTO } from './dto/login-user.dto';
 import { HttpService } from '@nestjs/axios';
 import { ApplicationServiceUrl } from './app.config';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { Request } from 'express';
+import { ChangePasswordDTO } from './dto/change-password.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -38,6 +39,16 @@ export class UsersController {
     const { data } = await this.httpService.axiosRef.get(`${ApplicationServiceUrl.Users}/${id}`, {
       headers: { 'Authorization': req.headers['authorization'] }
     });
+    return data;
+  }
+
+  @Patch('/:id')
+  public async changePassword(@Param('id') id: string, @Body() dto: ChangePasswordDTO, @Req() req: Request) {
+    const { data } = await this.httpService.axiosRef.patch(
+      `${ApplicationServiceUrl.Users}/${id}`,
+      dto,
+      { headers: { 'Authorization': req.headers['authorization'] } }
+    );
     return data;
   }
 }

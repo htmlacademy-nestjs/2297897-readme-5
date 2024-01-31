@@ -89,6 +89,18 @@ export class AuthController {
     return this.authService.createUserToken(user);
   }
 
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Password successfully changed'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You must be authorized before changing password'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You passed wrong old password'
+  })
   @HttpCode(HttpStatus.OK)
   @UseGuards(JWTAuthGuard)
   @Patch('/:id')
