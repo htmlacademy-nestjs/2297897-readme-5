@@ -41,3 +41,19 @@ Content-Type: application/json
   "newPassword": "coolSecret"
 }
 ###
+
+#Get file
+GET http://localhost:3000/api/files/65b9d6c5c0786e923689ac98
+###
+
+#Upload file
+POST http://localhost:3000/api/files/upload HTTP/1.1
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="testPhoto"
+
+<C:\Users\alien\Downloads\j2xS3_9sazQ.jpg
+--boundary--
+
+###

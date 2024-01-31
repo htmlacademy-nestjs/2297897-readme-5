@@ -1,6 +1,6 @@
-import { Subscriber } from "@project/libs/shared/types";
+import { Subscriber } from '@project/libs/shared/types';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from "mongoose";
+import { Document } from 'mongoose';
 
 @Schema({
   collection: 'email-subscribers',

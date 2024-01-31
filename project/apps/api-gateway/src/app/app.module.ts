@@ -4,6 +4,7 @@ import { HTTP_CLIENT_AVAILABLE_VALUE } from './app.config';
 import {ApiGatewayConfigModule} from '@project/libs/shared/config/api-gateway';
 import { UsersController } from './users.controller';
 import { CheckAuthGuard } from './guard/check-auth.guard';
+import { FileVaultController } from './file-vault.controller';
 
 @Module({
   imports: [
@@ -13,7 +14,10 @@ import { CheckAuthGuard } from './guard/check-auth.guard';
     }),
     ApiGatewayConfigModule
   ],
-  controllers: [UsersController],
+  controllers: [
+    UsersController,
+    FileVaultController,
+  ],
   providers: [CheckAuthGuard],
 })
 export class AppModule {}
