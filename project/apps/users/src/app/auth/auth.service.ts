@@ -1,5 +1,6 @@
 import {
   ConflictException, HttpException, HttpStatus,
+  Inject,
   Injectable, Logger, NotFoundException,
   UnauthorizedException
 } from '@nestjs/common';
@@ -10,6 +11,8 @@ import { AUTH_ERROR_MESSAGE } from './auth.messages';
 import { LoginUserDTO } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Token, TokenPayload, User } from '@project/libs/shared/types';
+import { jwtConfig } from '@project/libs/shared/config/users';
+import { ConfigType } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
@@ -18,6 +21,8 @@ export class AuthService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
+    @Inject(jwtConfig.KEY)
+    private readonly jwtOptions: ConfigType<typeof jwtConfig>
   ) { }
 
   public async register(dto: CreateUserDTO): Promise<UserEntity> {
@@ -64,6 +69,16 @@ export class AuthService {
     return existsUser;
   }
 
+  public async getUserByEmail(email: string) {
+    const existsUser = await this.userRepository.findByEmail(email);
+
+    if(!existsUser) {
+      throw new NotFoundException(`User with email ${email} not found`);
+    }
+
+    return existsUser;
+  }
+
   public async createUserToken(user: User): Promise<Token> {
     const tokenPayload: TokenPayload = {
       sub: user.id,
@@ -74,7 +89,12 @@ export class AuthService {
 
     try {
       const accessToken = await this.jwtService.signAsync(tokenPayload);
-      return { accessToken };
+      const refreshToken = await this.jwtService.signAsync(tokenPayload, {
+        secret: this.jwtOptions.refreshTokenSecret,
+        expiresIn: this.jwtOptions.refreshTokenExpiresIn,
+      });
+
+      return { accessToken, refreshToken };
     } catch(error) {
       this.logger.error(`[Token generation error]: ${error.message}`);
       throw new HttpException('An error occurred during token creation', HttpStatus.INTERNAL_SERVER_ERROR);

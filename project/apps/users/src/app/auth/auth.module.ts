@@ -7,6 +7,8 @@ import { ConfigService } from '@nestjs/config';
 import { getJWTOptions } from '@project/libs/shared/config/users';
 import { JWTAccessStrategy } from './strategies/jwt-access.strategy';
 import { NotifyModule } from '../notify/notify.module';
+import { LocalStrategy } from './strategies/local.strategy';
+import { JWTRefreshStrategy } from './strategies/jwt-refresh.strategy';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { NotifyModule } from '../notify/notify.module';
   providers: [
     AuthService,
     JWTAccessStrategy,
+    JWTRefreshStrategy,
+    LocalStrategy
   ],
 })
 export class AuthModule {}
