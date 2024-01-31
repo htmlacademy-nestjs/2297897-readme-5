@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@project/libs/shared/config/api-gateway": [
+        "libs/shared/config/api-gateway/src/index.ts"
+      ],
       "@project/libs/shared/config/file-vault": [
         "libs/shared/config/file-vault/src/index.ts"
       ],
