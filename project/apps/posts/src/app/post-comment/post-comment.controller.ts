@@ -5,7 +5,7 @@ import { fillDTO } from '@project/libs/shared/helpers';
 import { PostCommentRDO } from './rdo/post-comment.rdo';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Comments')
+@ApiTags('comments')
 @Controller('posts/:postId/comments')
 export class PostCommentController {
   constructor(

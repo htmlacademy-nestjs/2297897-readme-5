@@ -1,4 +1,4 @@
-import { User } from './user.interface';
+import { User } from '../users/user.interface';
 
 export interface TokenPayload extends User {
   sub: string,

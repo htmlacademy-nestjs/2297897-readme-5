@@ -133,4 +133,22 @@ export class PostRepository extends BasePostgresRepository<PostEntity, Post> {
 
     return this.createEntityFromDocument(document as Post);
   }
+
+  public async findByTitle(title: string): Promise<PostEntity[]> {
+    const documents = await this.client.post.findMany({
+      where: {
+        title: {
+        contains: title
+        }
+    },
+      include: {
+        tags: true,
+        comments: true,
+        likes: true,
+      }
+    });
+
+
+    return documents.map((document) => this.createEntityFromDocument(document as Post));
+  }
 }

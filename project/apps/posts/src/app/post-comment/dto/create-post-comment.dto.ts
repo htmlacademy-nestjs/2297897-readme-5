@@ -1,4 +1,4 @@
-import { IsMongoId, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsMongoId, MaxLength, MinLength } from 'class-validator';
 import { POST_COMMENT_AVAILABLE_VALUE } from '../post-comment.const';
 import { POST_COMMENT_VALIDATION_MESSAGE } from '../post-comment.message';
 import { ApiProperty } from '@nestjs/swagger';

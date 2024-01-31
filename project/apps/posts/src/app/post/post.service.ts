@@ -23,6 +23,10 @@ export class PostService {
     return this.postRepository.findById(id);
   }
 
+  public async getPostByTitle(title: string): Promise<PostEntity[]> {
+    return this.postRepository.findByTitle(title);
+  }
+
   public async getAllPosts(query?: PostQuery): Promise<PaginationResult<PostEntity>> {
     return this.postRepository.find(query);
   }

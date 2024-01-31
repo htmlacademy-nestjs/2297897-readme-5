@@ -1,16 +1,18 @@
-import { Controller, Body, Post, Get, Param, HttpStatus, UseGuards, Req, HttpCode } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, HttpStatus, UseGuards, Req, HttpCode, Patch } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { UserRDO } from './rdo/user.rdo';
 import { LoggedUserRDO } from './rdo/logged-user.rdo';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MongoIDValidationPipe } from '@project/libs/shared/core';
 import { JWTAuthGuard } from './guards/jwt-auth.guard';
 import { NotifyService } from '../notify/notify.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserEntity } from '../user/user.entity';
 import { JWTRefreshGuard } from './guards/jwt-refresh.guard';
+import { ChangePasswordDTO } from './dto/change-password.dto';
+import { RequestWithTokenPayload } from '@project/libs/shared/types';
 
 interface RequestWithUser {
   user: UserEntity;
@@ -58,6 +60,7 @@ export class AuthController {
     description: 'Password or login is wrong.'
   })
   @UseGuards(LocalAuthGuard)
+  @HttpCode(HttpStatus.OK)
   @Post('login')
   public async login(@Req() { user }: RequestWithUser) {
     const userToken = await this.authService.createUserToken(user);
@@ -68,6 +71,10 @@ export class AuthController {
     type: UserRDO,
     status: HttpStatus.OK,
     description: 'User founded.'
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User not found.'
   })
   @UseGuards(JWTAuthGuard)
   @Get(':id')
@@ -81,9 +88,63 @@ export class AuthController {
     status: HttpStatus.OK,
     description: 'Get a new access/refresh tokens'
   })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Need a refresh JWT token'
+  })
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Refresh JWT token',
+    required: true,
+  })
   @UseGuards(JWTRefreshGuard)
   @Post('refresh')
   public async refreshToken(@Req() { user }: RequestWithUser) {
     return this.authService.createUserToken(user);
+  }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Password successfully changed'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You must be authorized before changing password'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You passed wrong old password'
+  })
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Access JWT token',
+    required: true,
+  })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JWTAuthGuard)
+  @Patch('/:id')
+  public async changePassword(@Param('id', MongoIDValidationPipe) id: string, @Body() dto: ChangePasswordDTO) {
+    const updatedUser = await this.authService.changePassword(id, dto);
+    return fillDTO(UserRDO, updatedUser.serialize())
+  }
+
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Access JWT token',
+    required: true,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'You are authorized'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You are not authorized'
+  })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JWTAuthGuard)
+  @Post('check')
+  public async checkToken(@Req() {user: payload}: RequestWithTokenPayload) {
+    return payload;
   }
 }

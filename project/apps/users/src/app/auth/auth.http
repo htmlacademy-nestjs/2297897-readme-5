@@ -3,10 +3,10 @@ POST http://localhost:4546/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "NikitaLimin",
-  "password": "limin02",
+  "name": "RickSanchez",
+  "password": "plumbus",
   "avatarUrl": "uploads/avatars/123",
-  "email": "nikitalim@gmail.local"
+  "email": "rick@morty.com"
 }
 
 ###
@@ -16,19 +16,29 @@ POST http://localhost:4546/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "nikitalim@gmail.local",
-  "password": "limin02"
+  "email": "wroom@bike.com",
+  "password": "iAmAkira"
 }
 
 ###
 
 #Get user by id
-GET http://localhost:3333/api/auth/65b160d1f15a98895cf0f293 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJpcHBlckBsb25kb24uY29tIiwibmFtZSI6IkphY2tPUmlwcGVyIiwiYXZhdGFyVXJsIjoidXBsb2Fkcy9hdmF0YXJzL2JsYWNrLWhvb2QiLCJpYXQiOjE3MDYxMjQyNDUsImV4cCI6MTcwNjI5NzA0NX0._4acJZ8hd41SQhURNzLhlD7xZB2XGGKq1sPrZICaGbI
-
+GET http://localhost:4546/api/auth/65b9419566c1274a37a1244f HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJpYXQiOjE3MDY2NDE2NTIsImV4cCI6MTcwNjY0MTk1Mn0.Oxo5oKCV6BOEjwueoqP5ixnE2zyRsKUCwxIGQ2hmNr4
 ###
 
-#Refresh access/refresh tokens
-POST http://localhost:4546/api/auth/refresh HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5pa2l0YWxpbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJpYXQiOjE3MDY2MjE5OTksImV4cCI6MTcwOTIxMzk5OX0.6nXYB6QiPng6Vs6AjJEI4aZIYkBsGiXZmQlXy_gZ7Bg
+#Change user password
+PATCH http://localhost:4546/api/auth/65b9b8eec998deaad5595af0 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YjhlZWM5OThkZWFhZDU1OTVhZjAiLCJlbWFpbCI6InJpY2tAbW9ydHkuY29tIiwibmFtZSI6IlJpY2tTYW5jaGV6IiwiYXZhdGFyVXJsIjoidXBsb2Fkcy9hdmF0YXJzLzEyMyIsImlhdCI6MTcwNjY3MDM3NCwiZXhwIjoxNzA2NjcwNjc0fQ.zhzzgJb9eN2C2ePSFsQJUXD99BwR8ubtd8cU_KhOQ7U
+Content-Type: application/json
+
+{
+  "oldPassword": "McFlyer",
+  "newPassword": "pLumBus"
+}
+###
+
+#Check user token
+POST http://localhost:4546/api/auth/check HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY2NzQxNzcsImV4cCI6MTcwNjY3NDQ3N30.xDJT5Xi_89WWmczKGlF1THSSRhrnEV6vuEtKbT1AnIA
 ###
