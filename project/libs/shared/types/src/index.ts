@@ -12,6 +12,7 @@ export * from './lib/posts/post-property.enum';
 export * from './lib/app/environment.enum';
 export * from './lib/token/token-payload.interface';
 export * from './lib/token/token.interface';
+export * from './lib/token/request-with-token-payload.interface';
 export * from './lib/token/base-token.interface';
 export * from './lib/token/refresh-token-payload.interface';
 export * from './lib/file-vault/file.interface';

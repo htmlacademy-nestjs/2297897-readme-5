@@ -16,8 +16,8 @@ POST http://localhost:4546/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "rick@morty.com",
-  "password": "McFlyer"
+  "email": "wroom@bike.com",
+  "password": "iAmAkira"
 }
 
 ###
@@ -36,4 +36,9 @@ Content-Type: application/json
   "oldPassword": "McFlyer",
   "newPassword": "pLumBus"
 }
+###
+
+#Check user token
+POST http://localhost:4546/api/auth/check HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY2NzQxNzcsImV4cCI6MTcwNjY3NDQ3N30.xDJT5Xi_89WWmczKGlF1THSSRhrnEV6vuEtKbT1AnIA
 ###

@@ -12,6 +12,7 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserEntity } from '../user/user.entity';
 import { JWTRefreshGuard } from './guards/jwt-refresh.guard';
 import { ChangePasswordDTO } from './dto/change-password.dto';
+import { RequestWithTokenPayload } from '@project/libs/shared/types';
 
 interface RequestWithUser {
   user: UserEntity;
@@ -107,5 +108,20 @@ export class AuthController {
   public async changePassword(@Param('id', MongoIDValidationPipe) id: string, @Body() dto: ChangePasswordDTO) {
     const updatedUser = await this.authService.changePassword(id, dto);
     return fillDTO(UserRDO, updatedUser.serialize())
+  }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'You are authorized'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'You are not authorized'
+  })
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JWTAuthGuard)
+  @Post('check')
+  public async checkToken(@Req() {user: payload}: RequestWithTokenPayload) {
+    return payload;
   }
 }
