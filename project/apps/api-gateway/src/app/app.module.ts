@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { HTTP_CLIENT_AVAILABLE_VALUE } from './app.config';
 import {ApiGatewayConfigModule} from '@project/libs/shared/config/api-gateway';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import {ApiGatewayConfigModule} from '@project/libs/shared/config/api-gateway';
     }),
     ApiGatewayConfigModule
   ],
-  controllers: [],
+  controllers: [UsersController],
   providers: [],
 })
 export class AppModule {}

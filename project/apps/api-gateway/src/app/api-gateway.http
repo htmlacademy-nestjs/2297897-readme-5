@@ -1,0 +1,31 @@
+POST http://localhost:3000/api/users/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "NikitaLimin",
+  "password": "limin02",
+  "avatarUrl": "uploads/avatars/123",
+  "email": "nikitxzim@gmail.local"
+}
+###
+
+#Authorize user by email and password
+POST http://localhost:3000/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "nikitazim@gmail.local",
+  "password": "limin02"
+}
+
+###
+
+#Refresh access/refresh tokens
+POST http://localhost:4546/api/auth/refresh HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJ0b2tlbklkIjoiNmYyNGVkY2QtMWI3OC00Zjk3LWIxMGUtMGJlZjQyMzdiMTJlIiwiaWF0IjoxNzA2NjY4NjQ2LCJleHAiOjE3MDkyNjA2NDZ9.KMRGYp3FrbvnV0DG2RdpSqJN_tUk65h_HbKxDJ6T4C8
+###
+
+#Get user by id
+GET http://localhost:4546/api/auth/65a315542e79f6c6a9a4bfac HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJpYXQiOjE3MDY2Njg3NDcsImV4cCI6MTcwNjY2OTA0N30.5XdCGc_z59Sg4_EvxgLJeGPQx9ms7hQMJghWe-nTtq8
+###
