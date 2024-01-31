@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post, Req, UseFilters } from '@nes
 import { ApiTags } from '@nestjs/swagger';
 import { LoginUserDTO } from './dto/login-user.dto';
 import { HttpService } from '@nestjs/axios';
-import { ApplicationServiceUrl } from './app.config';
+import { ApplicationServiceURL } from './app.config';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { Request } from 'express';
 import { ChangePasswordDTO } from './dto/change-password.dto';
@@ -18,19 +18,19 @@ export class UsersController {
 
   @Post('/register')
   public async register(@Body() dto: CreateUserDTO) {
-    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceUrl.Users}/register`, dto);
+    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Users}/register`, dto);
     return data;
   }
 
   @Post('/login')
   public async login(@Body() dto: LoginUserDTO) {
-    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceUrl.Users}/login`, dto);
+    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Users}/login`, dto);
     return data;
   }
 
   @Post('/refresh')
   public async refreshToken(@Req() req: Request) {
-    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceUrl.Users}/refresh`, null, {
+    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Users}/refresh`, null, {
       headers: { 'Authorization': req.headers['authorization'] }
     });
     return data;
@@ -38,7 +38,7 @@ export class UsersController {
 
   @Get(':id')
   public async show(@Param('id') id: string, @Req() req: Request) {
-    const { data } = await this.httpService.axiosRef.get(`${ApplicationServiceUrl.Users}/${id}`, {
+    const { data } = await this.httpService.axiosRef.get(`${ApplicationServiceURL.Users}/${id}`, {
       headers: { 'Authorization': req.headers['authorization'] }
     });
     return data;
@@ -47,7 +47,7 @@ export class UsersController {
   @Patch('/:id')
   public async changePassword(@Param('id') id: string, @Body() dto: ChangePasswordDTO, @Req() req: Request) {
     const { data } = await this.httpService.axiosRef.patch(
-      `${ApplicationServiceUrl.Users}/${id}`,
+      `${ApplicationServiceURL.Users}/${id}`,
       dto,
       { headers: { 'Authorization': req.headers['authorization'] } }
     );

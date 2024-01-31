@@ -3,6 +3,7 @@ import { HttpModule } from '@nestjs/axios';
 import { HTTP_CLIENT_AVAILABLE_VALUE } from './app.config';
 import {ApiGatewayConfigModule} from '@project/libs/shared/config/api-gateway';
 import { UsersController } from './users.controller';
+import { CheckAuthGuard } from './guard/check-auth.guard';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { UsersController } from './users.controller';
     ApiGatewayConfigModule
   ],
   controllers: [UsersController],
-  providers: [],
+  providers: [CheckAuthGuard],
 })
 export class AppModule {}

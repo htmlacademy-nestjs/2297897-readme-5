@@ -1,4 +1,4 @@
-export enum ApplicationServiceUrl {
+export enum ApplicationServiceURL {
   Users = 'http://localhost:4546/api/auth',
   Notify = 'http://localhost:4545/api',
   Posts = 'http://localhost:4000/api/posts',
