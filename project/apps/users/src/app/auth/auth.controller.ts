@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { UserRDO } from './rdo/user.rdo';
 import { LoggedUserRDO } from './rdo/logged-user.rdo';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MongoIDValidationPipe } from '@project/libs/shared/core';
 import { JWTAuthGuard } from './guards/jwt-auth.guard';
 import { NotifyService } from '../notify/notify.service';
@@ -92,6 +92,11 @@ export class AuthController {
     status: HttpStatus.UNAUTHORIZED,
     description: 'Need a refresh JWT token'
   })
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Refresh JWT token',
+    required: true,
+  })
   @UseGuards(JWTRefreshGuard)
   @Post('refresh')
   public async refreshToken(@Req() { user }: RequestWithUser) {
@@ -110,6 +115,11 @@ export class AuthController {
     status: HttpStatus.UNAUTHORIZED,
     description: 'You passed wrong old password'
   })
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Access JWT token',
+    required: true,
+  })
   @HttpCode(HttpStatus.OK)
   @UseGuards(JWTAuthGuard)
   @Patch('/:id')
@@ -118,6 +128,11 @@ export class AuthController {
     return fillDTO(UserRDO, updatedUser.serialize())
   }
 
+  @ApiHeader({
+    name: 'Auth',
+    description: 'Access JWT token',
+    required: true,
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'You are authorized'
