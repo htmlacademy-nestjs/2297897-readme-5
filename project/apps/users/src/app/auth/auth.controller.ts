@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Get, Param, HttpStatus, UseGuards, Req, HttpCode } from '@nestjs/common';
+import { Controller, Body, Post, Get, Param, HttpStatus, UseGuards, Req, HttpCode, Patch } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { fillDTO } from '@project/libs/shared/helpers';
@@ -11,6 +11,7 @@ import { NotifyService } from '../notify/notify.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserEntity } from '../user/user.entity';
 import { JWTRefreshGuard } from './guards/jwt-refresh.guard';
+import { ChangePasswordDTO } from './dto/change-password.dto';
 
 interface RequestWithUser {
   user: UserEntity;
@@ -58,6 +59,7 @@ export class AuthController {
     description: 'Password or login is wrong.'
   })
   @UseGuards(LocalAuthGuard)
+  @HttpCode(HttpStatus.OK)
   @Post('login')
   public async login(@Req() { user }: RequestWithUser) {
     const userToken = await this.authService.createUserToken(user);
@@ -85,5 +87,13 @@ export class AuthController {
   @Post('refresh')
   public async refreshToken(@Req() { user }: RequestWithUser) {
     return this.authService.createUserToken(user);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JWTAuthGuard)
+  @Patch('/:id')
+  public async changePassword(@Param('id', MongoIDValidationPipe) id: string, @Body() dto: ChangePasswordDTO) {
+    const updatedUser = await this.authService.changePassword(id, dto);
+    return fillDTO(UserRDO, updatedUser.serialize())
   }
 }

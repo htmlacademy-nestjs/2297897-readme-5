@@ -3,10 +3,10 @@ POST http://localhost:4546/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "NikitaLimin",
-  "password": "limin02",
+  "name": "RickSanchez",
+  "password": "plumbus",
   "avatarUrl": "uploads/avatars/123",
-  "email": "nikitazim@gmail.local"
+  "email": "rick@morty.com"
 }
 
 ###
@@ -16,8 +16,8 @@ POST http://localhost:4546/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "nikitazim@gmail.local",
-  "password": "limin02"
+  "email": "rick@morty.com",
+  "password": "McFlyer"
 }
 
 ###
@@ -27,7 +27,13 @@ GET http://localhost:4546/api/auth/65b9419566c1274a37a1244f HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJpYXQiOjE3MDY2NDE2NTIsImV4cCI6MTcwNjY0MTk1Mn0.Oxo5oKCV6BOEjwueoqP5ixnE2zyRsKUCwxIGQ2hmNr4
 ###
 
-#Refresh access/refresh tokens
-POST http://localhost:4546/api/auth/refresh HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJ0b2tlbklkIjoiNjc4ZmYyZTEtNmVlYS00ZWM1LTgzYzgtYWM1N2NiNmI0ZDVmIiwiaWF0IjoxNzA2NjQxNjUyLCJleHAiOjE3MDkyMzM2NTJ9.Zb00gjhA-BZP6rxJLZX1uqDMN0FEYm8UnNxkySPlGl8
+#Change user password
+PATCH http://localhost:4546/api/auth/65b9b8eec998deaad5595af0 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YjhlZWM5OThkZWFhZDU1OTVhZjAiLCJlbWFpbCI6InJpY2tAbW9ydHkuY29tIiwibmFtZSI6IlJpY2tTYW5jaGV6IiwiYXZhdGFyVXJsIjoidXBsb2Fkcy9hdmF0YXJzLzEyMyIsImlhdCI6MTcwNjY3MDM3NCwiZXhwIjoxNzA2NjcwNjc0fQ.zhzzgJb9eN2C2ePSFsQJUXD99BwR8ubtd8cU_KhOQ7U
+Content-Type: application/json
+
+{
+  "oldPassword": "McFlyer",
+  "newPassword": "pLumBus"
+}
 ###
