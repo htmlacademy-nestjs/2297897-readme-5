@@ -3,24 +3,25 @@ import { Environment } from '@project/libs/shared/types';
 import * as Joi from 'joi';
 
 export interface ApiGatewayConfig {
-  environment: Environment,
+  environment: Environment;
   port: number;
 }
 
 const validationSchema = Joi.object({
-  environment: Joi.string().valid(...Object.values(Environment)).required,
+  environment: Joi.string().valid(...Object.values(Environment)).required(),
   port: Joi.number().port().required(),
 });
 
 function validateConfig(config: ApiGatewayConfig) {
-  const {error} = validationSchema.validate(config);
+  const { error } = validationSchema.validate(config, { abortEarly: true });
 
-  if(error) {
+  if (error) {
     throw new Error(`[ApiGateway Config Validation Error]: ${error.message}`);
   }
 }
 
 function getConfig(): ApiGatewayConfig {
+  console.log(process.env.NODE_ENV)
   const config: ApiGatewayConfig = {
     environment: process.env.NODE_ENV as Environment,
     port: parseInt(process.env.PORT, 10),

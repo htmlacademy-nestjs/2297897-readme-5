@@ -3,15 +3,14 @@ import { Environment } from '@project/libs/shared/types';
 import * as Joi from 'joi';
 
 type ApplicationConfig = {
-  environment: Environment,
-  port: number,
+  environment: Environment;
+  port: number;
 }
 
 const validationSchema = Joi.object({
   environment: Joi.string().valid(...Object.values(Environment)).required(),
   port: Joi.number().port().required(),
 })
-
 
 function validateConfig(config: ApplicationConfig): void {
   const { error } = validationSchema.validate(config, { abortEarly: true });
