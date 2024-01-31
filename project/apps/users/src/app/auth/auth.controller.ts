@@ -72,6 +72,10 @@ export class AuthController {
     status: HttpStatus.OK,
     description: 'User founded.'
   })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'User not found.'
+  })
   @UseGuards(JWTAuthGuard)
   @Get(':id')
   public async show(@Param('id', MongoIDValidationPipe) id: string) {
@@ -83,6 +87,10 @@ export class AuthController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Get a new access/refresh tokens'
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Need a refresh JWT token'
   })
   @UseGuards(JWTRefreshGuard)
   @Post('refresh')
