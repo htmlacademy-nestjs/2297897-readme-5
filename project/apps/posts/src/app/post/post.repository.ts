@@ -151,6 +151,4 @@ export class PostRepository extends BasePostgresRepository<PostEntity, Post> {
 
     return documents.map((document) => this.createEntityFromDocument(document as Post));
   }
-
-
 }
