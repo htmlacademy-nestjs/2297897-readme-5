@@ -9,9 +9,10 @@ Content-Type: application/json
 
 {
   "userId": "65a315542e79f6c6a9a4bfac",
-  "postType": "quote",
-  "quoteText": "Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э.",
-  "quoteAuthor": "LipsumOrg",
+  "postType": "text",
+  "title": "Минasdaasasdasdadasdasdasdasdasdasdsadasd ",
+  "announcement": "Текст с анонсом публикации. Минимальная длина 50 символов, максимальная 255.",
+  "postText": "Текст публикации (обязательно). Минимальная длина 100 символов, максимальная 1024 символа. Минимальная длина 100",
   "tags": ["a2ac020c-bb62-4564-81b2-3dde62f2d118", "3f00cb99-cc9d-4c53-b784-6da39cedf9ce"]
 }
 
@@ -36,6 +37,15 @@ Content-Type: application/json
 #Get post by ID
 GET http://localhost:4000/api/posts/9e3c1668-cf8e-4362-b73c-7db26797826b HTTP/1.1
 
+###
+
+#Get post by Title
+GET http://localhost:4000/api/posts/title HTTP/1.1
+Content-Type: application/json
+
+{
+  "queryString": "Мин"
+}
 ###
 
 #Update post by ID

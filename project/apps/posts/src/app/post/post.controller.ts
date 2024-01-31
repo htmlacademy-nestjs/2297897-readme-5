@@ -7,6 +7,7 @@ import { PostWithPaginationRDO } from './rdo/post-with-pagination.rdo';
 import { CreatePostDTO } from './dto/create-post.dto';
 import { UpdatePostDTO } from './dto/update-post.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FindTitleDTO } from './dto/find-title-post.dto';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -28,6 +29,17 @@ export class PostController {
       entities: postsWithPagination.entities.map((post) => post.serialize()),
     };
     return fillDTO(PostWithPaginationRDO, result);
+  }
+
+  @ApiResponse({
+    type: [PostRDO],
+    status: HttpStatus.OK,
+    description: 'Posts whose titles match the query or empty array, if posts doesn\'t matched'
+  })
+  @Get('/title')
+  public async findByTitle(@Body() dto: FindTitleDTO): Promise<PostRDO> {
+    const posts = await this.postService.getPostByTitle(dto.queryString);
+    return fillDTO(PostRDO, posts.map((post) => post.serialize()));
   }
 
   @ApiResponse({
