@@ -5,6 +5,7 @@ import {ApiGatewayConfigModule} from '@project/libs/shared/config/api-gateway';
 import { UsersController } from './users.controller';
 import { CheckAuthGuard } from './guard/check-auth.guard';
 import { FileVaultController } from './file-vault.controller';
+import { PostsController } from './posts.controller';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { FileVaultController } from './file-vault.controller';
   controllers: [
     UsersController,
     FileVaultController,
+    PostsController
   ],
   providers: [CheckAuthGuard],
 })

@@ -36,7 +36,7 @@ export class PostController {
     status: HttpStatus.OK,
     description: 'Posts whose titles match the query or empty array, if posts doesn\'t matched'
   })
-  @Get('/title')
+  @Post('/title')
   public async findByTitle(@Body() dto: FindTitleDTO): Promise<PostRDO> {
     const posts = await this.postService.getPostByTitle(dto.queryString);
     return fillDTO(PostRDO, posts.map((post) => post.serialize()));
