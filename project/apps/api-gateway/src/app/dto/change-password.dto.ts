@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { USER_VALIDATON_MESSAGE } from '../../../../users/src/app/user/validation.messages';
+import { USER_VALIDATON_MESSAGE } from '../const';
 import { IsString, MaxLength, MinLength } from 'class-validator';
-import { USER_AVAILABLE_VALUE } from '../../../../users/src/app/user/user.constant';
+import { USER_AVAILABLE_VALUE } from '../const';
 
 export class ChangePasswordDTO {
   @ApiProperty({
