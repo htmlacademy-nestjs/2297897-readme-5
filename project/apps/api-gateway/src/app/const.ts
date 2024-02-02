@@ -97,3 +97,27 @@ export const POST_VALIDATION_MESSAGE = {
     MAX_LENGTH: 'Max description length is 300 chars',
   },
 } as const;
+
+export const USER_VALIDATON_MESSAGE = {
+  EMAIL_NOT_VALID: 'The email is not valid',
+  USER_NAME_NOT_VALID: {
+    MIN_LENGTH: 'Min name length is 3 chars',
+    MAX_LENGTH: 'Max name length is 50 chars',
+  },
+  PASSWORD_LENGTH_NOT_VALID: {
+    MIN_LENGTH: 'Min password length is 6 chars',
+    MAX_LENGTH: 'Max password length is 12 chars',
+  }
+} as const;
+
+export const SALT_ROUNDS = 10;
+export const USER_AVAILABLE_VALUE = {
+  NAME: {
+    MIN_LENGTH: 3,
+    MAX_LENGTH: 50,
+  },
+  PASSWORD: {
+    MIN_LENGTH: 6,
+    MAX_LENGTH: 12,
+  }
+} as const;
