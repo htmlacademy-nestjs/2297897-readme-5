@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsEmail, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
-import { USER_AVAILABLE_VALUE } from '../../../../users/src/app/user/user.constant';
-import { USER_VALIDATON_MESSAGE } from '../../../../users/src/app/user/validation.messages';
+import { USER_AVAILABLE_VALUE } from '../const';
+import { USER_VALIDATON_MESSAGE } from '../const';
 
 export class CreateUserDTO {
   @ApiProperty({

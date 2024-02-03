@@ -1,7 +1,6 @@
 import { HttpService } from '@nestjs/axios';
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, Req, UseFilters } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Req, UseFilters } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { PostQuery } from './query/post.query';
 import { PostWithPaginationRDO } from './rdo/post-with-pagination.rdo';
 import { FindTitleDTO } from './dto/find-title-post.dto';
 import { PostRDO } from './rdo/post.rdo';

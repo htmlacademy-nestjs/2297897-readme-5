@@ -1,6 +1,5 @@
 import { Entity, EntityIdType } from '@project/libs/shared/core';
 import { Like } from '@project/libs/shared/types';
-import { CreatePostLikeDTO } from './dto/create-post-like.dto';
 
 export class PostLikeEntity implements Like, Entity<EntityIdType, Like> {
   public id?: string;

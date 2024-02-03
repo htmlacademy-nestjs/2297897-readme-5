@@ -1,4 +1,4 @@
-import { IsMongoId, IsUUID, MaxLength, MinLength } from 'class-validator';
+import { IsMongoId } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { POST_LIKE_VALIDATION_MESSAGE } from '../post-like.message';
 

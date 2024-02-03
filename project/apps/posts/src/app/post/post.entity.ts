@@ -1,5 +1,5 @@
 import { Entity, EntityIdType } from '@project/libs/shared/core';
-import { Like, Post, PostState, PostType, User, Comment, PostProperty } from '@project/libs/shared/types';
+import { Like, Post, PostState, PostType, User, PostProperty } from '@project/libs/shared/types';
 import { PostTagEntity } from '../post-tag/post-tag.entity';
 import { POST_AVAILABLE_VALUE } from './post.constant';
 import { CreatePostDTO } from './dto/create-post.dto';

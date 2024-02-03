@@ -3,8 +3,6 @@ import { PostLikeService } from './post-like.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { PostLikeRDO } from './rdo/post-like.rdo';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthUser } from '@project/libs/shared/core';
-import { TokenPayload } from '@project/libs/shared/types';
 
 @ApiTags('likes')
 @Controller('posts/:postId/likes')

@@ -26,7 +26,7 @@ export class PostTagService {
   }
 
   public async getPostTagById(id: string): Promise<PostTagEntity> {
-    return this.postTagRepository.findById(id);;
+    return this.postTagRepository.findById(id);
   }
 
   public async getAllPostTags(): Promise<PostTagEntity[]> {
@@ -64,8 +64,7 @@ export class PostTagService {
     const postTagEntity = new PostTagEntity(dto);
 
     try {
-      const updatedPostTag = await this.postTagRepository.update(id, postTagEntity);
-      return updatedPostTag;
+      return await this.postTagRepository.update(id, postTagEntity);
     } catch {
       throw new NotFoundException(`Tag with id «${id}» not found`);
     }

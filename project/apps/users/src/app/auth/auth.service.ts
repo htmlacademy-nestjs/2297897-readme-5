@@ -80,7 +80,7 @@ export class AuthService {
     }
 
     await existsUser.setPassword(dto.newPassword);
-    return this.userRepository.update(existsUser.id, existsUser);;
+    return this.userRepository.update(existsUser.id, existsUser);
   }
 
   public async getUserByEmail(email: string) {

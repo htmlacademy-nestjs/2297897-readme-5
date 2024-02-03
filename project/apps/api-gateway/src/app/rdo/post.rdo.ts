@@ -1,4 +1,4 @@
-import { PostState, PostType, Tag } from '@project/libs/shared/types';
+import { PostState, PostType } from '@project/libs/shared/types';
 import { Expose, Type } from 'class-transformer';
 import { PostTagRDO } from './post-tag.rdo';
 import { PostCommentRDO } from './post-comment.rdo';

@@ -1,4 +1,4 @@
-import { Body, Controller } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { EmailSubscriberService } from './subscriber.service';
 import { CreateSubscriberDTO } from './dto/create-subscriber.dto';
 import { RabbitSubscribe } from '@golevelup/nestjs-rabbitmq';
