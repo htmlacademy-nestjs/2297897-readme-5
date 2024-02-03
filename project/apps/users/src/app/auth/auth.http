@@ -3,10 +3,10 @@ POST http://localhost:4546/api/auth/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "RickSanchez",
+  "name": "GhostRider",
   "password": "plumbus",
   "avatarUrl": "uploads/avatars/123",
-  "email": "rick@morty.com"
+  "email": "ghost@morty.com"
 }
 
 ###
@@ -16,8 +16,8 @@ POST http://localhost:4546/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "wroom@bike.com",
-  "password": "iAmAkira"
+  "email": "ghost@morty.com",
+  "password": "plumbus"
 }
 
 ###

@@ -5,7 +5,7 @@ import { UserModule } from '../user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { getJWTOptions } from '@project/libs/shared/config/users';
-import { JWTAccessStrategy } from './strategies/jwt-access.strategy';
+import { JWTAccessStrategy } from '@project/libs/shared/core';
 import { NotifyModule } from '../notify/notify.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JWTRefreshStrategy } from './strategies/jwt-refresh.strategy';

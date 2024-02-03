@@ -37,7 +37,7 @@ export class PostLikeService {
       throw new ConflictException('User already create like on this post');
     }
 
-    return this.postLikeRepository.create(PostLikeEntity.fromDto(postId, userId));
+    return this.postLikeRepository.create(PostLikeEntity.fromDto(userId, postId));
   }
 
   public async deleteLike(postId: string, userId: string): Promise<void> {
