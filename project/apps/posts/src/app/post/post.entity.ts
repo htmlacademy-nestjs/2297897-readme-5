@@ -1,9 +1,10 @@
 import { Entity, EntityIdType } from '@project/libs/shared/core';
-import { Like, Post, PostState, PostType, User, PostProperty } from '@project/libs/shared/types';
+import { Post, PostState, PostType, User, PostProperty } from '@project/libs/shared/types';
 import { PostTagEntity } from '../post-tag/post-tag.entity';
 import { POST_AVAILABLE_VALUE } from './post.constant';
 import { CreatePostDTO } from './dto/create-post.dto';
 import { PostCommentEntity } from '../post-comment/post-comment.entity';
+import { PostLikeEntity } from '../post-like/post-like.entity';
 
 export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public id?: string;
@@ -20,7 +21,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
   public creatorUserId?: User['id'];
   public originalPostId?: string;
 
-  public likes: Like[];       //  | LikeEntity[]     |
+  public likes: PostLikeEntity[];
   public comments: PostCommentEntity[];
 
   public title?: string;
@@ -53,7 +54,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
     this.creatorUserId = data.creatorUserId;
     this.originalPostId = data.originalPostId;
     this.isReposted = data.isReposted;
-    this.likes = [];
+    this.likes = data.likes.map((like) => PostLikeEntity.fromObject(like));
     this.comments = data.comments.map((comment) => PostCommentEntity.fromObject(comment));
     this.title = data.title;
     this.link = data.link;
@@ -82,7 +83,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
       isReposted: this.isReposted,
       publishDate: this.publishDate,
       comments: this.comments?.map((comment) => comment.serialize()) ?? [],
-      likes: [],
+      likes: this.likes.map((like) => like.serialize()),
     };
 
     if(this.isReposted) {

@@ -3,6 +3,7 @@ import { Expose, Type } from 'class-transformer';
 import { PostTagRDO } from '../../post-tag/rdo/post-tag.rdo';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { PostCommentRDO } from '../../post-comment/rdo/post-comment.rdo';
+import { PostLikeRDO } from '../../post-like/rdo/post-like.rdo';
 
 export class PostRDO {
   @ApiProperty({
@@ -65,7 +66,7 @@ export class PostRDO {
     example: true,
   })
   @Expose()
-  public isResposted: boolean;
+  public isReposted: boolean;
 
   @ApiPropertyOptional({
     description: 'The original author ID of the post, that belonged to the post before reposting it',
@@ -153,7 +154,7 @@ export class PostRDO {
 
   @ApiProperty({
     description: 'List of comments for post',
-    type: PostCommentRDO,
+    type: [PostCommentRDO],
     example: [{
         message: 'Hello again, my little friends!',
         userId: '65a315542e79f6c6a9a4bfac',
@@ -164,4 +165,17 @@ export class PostRDO {
   })
   @Expose()
   public comments: string;
+
+  @ApiProperty({
+    description: 'List of comments for post',
+    type: [PostLikeRDO],
+    example: [{
+      userId: "65be988a21a7a15a148ec3f1",
+      postId: "51bd7639-adc1-49c6-8fc1-be98969f0c7e",
+      createdAt: "2024-02-04T16:24:55.117Z",
+      updatedAt: "2024-02-04T16:24:55.117Z"
+    }]
+  })
+  @Expose()
+  public likes: PostLikeRDO[];
 }

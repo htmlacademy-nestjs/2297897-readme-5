@@ -13,7 +13,6 @@ const validationSchema = Joi.object({
   accessTokenExpiresIn: Joi.string().required(),
   refreshTokenSecret: Joi.string().required(),
   refreshTokenExpiresIn: Joi.string().required(),
-
 });
 
 function validateConfig(config: JWTConfig): void {
