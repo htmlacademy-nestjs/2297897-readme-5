@@ -1,4 +1,4 @@
-import {Controller, Get, HttpCode, HttpStatus, Param, Post, Req} from '@nestjs/common';
+import {Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Req} from '@nestjs/common';
 import { PostLikeService } from './post-like.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { PostLikeRDO } from './rdo/post-like.rdo';
@@ -18,6 +18,10 @@ export class PostLikeController {
     status: HttpStatus.CREATED,
     description: 'A new like has been created'
   })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already create like on this post'
+  })
   @Post('/like')
   @UseGuards(JWTAuthGuard)
   public async like(@Req() { user }: RequestWithTokenPayload, @Param('postId') postId: string): Promise<PostLikeRDO> {
@@ -29,7 +33,11 @@ export class PostLikeController {
     status: HttpStatus.NO_CONTENT,
     description: 'Like has been deleted'
   })
-  @Post('/dislike')
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User don\'t like this post before'
+  })
+  @Delete('/dislike')
   @UseGuards(JWTAuthGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
   public async dislike(@Req() { user }: RequestWithTokenPayload, @Param('postId') postId: string): Promise<void> {

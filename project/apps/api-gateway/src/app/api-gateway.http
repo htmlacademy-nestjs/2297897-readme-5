@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
   "email": "wroom@bike.com",
-  "password": "iAmAkira"
+  "password": "coolSecret"
 }
 
 ###
@@ -73,7 +73,7 @@ GET http://localhost:3000/api/posts/ HTTP/1.1
 ###
 
 #Get post by id
-GET http://localhost:3000/api/posts/1c711844-dcd4-4a0b-af31-2eda29ab56ec HTTP/1.1
+GET http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5 HTTP/1.1
 ###
 
 #Create new Post
@@ -101,8 +101,16 @@ Content-Type: application/json
 ###
 
 #Delete post by ID
-DELETE http://localhost:4000/api/posts/59d5d02c-3247-4395-95f9-1ccda3a08bbf HTTP/1.1
+DELETE http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5 HTTP/1.1
 
 ###
 
 #Add like on post
+POST http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5/likes/like HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDcwNjg1NzksImV4cCI6MTcwNzA2ODg3OX0.YXWTGAC9Ij-1Kf08Z81fOA_csyZC9PJR8i9e0ryyQmE
+###
+
+#Delete like from post
+DELETE http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5/likes/dislike HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDcwNjg1NzksImV4cCI6MTcwNzA2ODg3OX0.YXWTGAC9Ij-1Kf08Z81fOA_csyZC9PJR8i9e0ryyQmE
+###

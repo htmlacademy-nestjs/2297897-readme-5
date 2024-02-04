@@ -83,7 +83,7 @@ export class PostEntity implements Post, Entity<EntityIdType, Post> {
       isReposted: this.isReposted,
       publishDate: this.publishDate,
       comments: this.comments?.map((comment) => comment.serialize()) ?? [],
-      likes: this.likes.map((like) => like.serialize()),
+      likes: this.likes?.map((like) => like.serialize()),
     };
 
     if(this.isReposted) {
