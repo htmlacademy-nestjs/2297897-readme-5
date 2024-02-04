@@ -1,4 +1,4 @@
-import {Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Req} from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Req } from '@nestjs/common';
 import { PostLikeService } from './post-like.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { PostLikeRDO } from './rdo/post-like.rdo';

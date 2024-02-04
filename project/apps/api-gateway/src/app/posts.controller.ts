@@ -11,7 +11,6 @@ import {
   Post,
   Req,
   UseFilters,
-  UseGuards
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PostWithPaginationRDO } from './rdo/post-with-pagination.rdo';
@@ -21,9 +20,7 @@ import { CreatePostDTO } from './dto/create-post.dto';
 import { UpdatePostDTO } from './dto/update-post.dto';
 import { ApplicationServiceURL } from './app.config';
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
-import { JWTAuthGuard } from '@project/libs/shared/core';
 import { PostLikeRDO } from './rdo/post-like.rdo';
-import {RequestWithTokenPayload} from "@project/libs/shared/types";
 
 
 @ApiTags('Posts')
