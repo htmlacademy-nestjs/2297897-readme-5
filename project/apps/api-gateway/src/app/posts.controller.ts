@@ -22,7 +22,6 @@ import { ApplicationServiceURL } from './app.config';
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
 import { PostLikeRDO } from './rdo/post-like.rdo';
 
-
 @ApiTags('Posts')
 @UseFilters(AxiosExceptionFilter)
 @Controller('posts')
@@ -116,6 +115,24 @@ export class PostsController {
     const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Posts}/${postId}/likes/like`, null, {
       headers: { 'Authorization': req.headers['authorization'] }
     } );
+    return data;
+  }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The post was successfully published from a draft'
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Post with this id not found'
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Post with this id already published'
+  })
+  @Patch('/:id/publish')
+  public async publish(@Param('id') id: string) {
+    const { data } = await this.httpService.axiosRef.patch(`${ApplicationServiceURL.Posts}/${id}/publish`);
     return data;
   }
 

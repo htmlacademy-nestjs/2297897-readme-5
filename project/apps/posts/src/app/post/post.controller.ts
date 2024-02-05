@@ -92,4 +92,22 @@ export class PostController {
   public async delete(@Param('id') id: string): Promise<void> {
     await this.postService.deletePost(id);
   }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The post was successfully published from a draft'
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Post with this id not found'
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Post with this id already published'
+  })
+  @Patch('/:id/publish')
+  public async publish(@Param('id') id: string) {
+    const publishedPost = await this.postService.publishPost(id);
+    return fillDTO(PostRDO, publishedPost.serialize());
+  }
 }
