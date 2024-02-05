@@ -14,7 +14,7 @@ export class RefreshTokenService {
     @Inject(jwtConfig.KEY) private readonly jwtOptions: ConfigType<typeof jwtConfig>
   ){ }
 
-    public async createRefreshSession(payload: RefreshTokenPayload) {
+    public createRefreshSession(payload: RefreshTokenPayload) {
       const timeValue = parseTime(this.jwtOptions.refreshTokenExpiresIn);
       const refreshToken = RefreshTokenEntity.fromObject({
         tokenId: payload.tokenId,

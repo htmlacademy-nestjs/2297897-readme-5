@@ -1,7 +1,18 @@
 import { HttpService } from '@nestjs/axios';
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, Req, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseFilters,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { PostQuery } from './query/post.query';
 import { PostWithPaginationRDO } from './rdo/post-with-pagination.rdo';
 import { FindTitleDTO } from './dto/find-title-post.dto';
 import { PostRDO } from './rdo/post.rdo';
@@ -9,7 +20,7 @@ import { CreatePostDTO } from './dto/create-post.dto';
 import { UpdatePostDTO } from './dto/update-post.dto';
 import { ApplicationServiceURL } from './app.config';
 import { AxiosExceptionFilter } from './filters/axios-exception.filter';
-
+import { PostLikeRDO } from './rdo/post-like.rdo';
 
 @ApiTags('Posts')
 @UseFilters(AxiosExceptionFilter)
@@ -89,6 +100,58 @@ export class PostsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   public async delete(@Param('id') id: string): Promise<void> {
     await this.httpService.axiosRef.delete(`${ApplicationServiceURL.Posts}/${id}`);
+  }
+
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'A new like has been created'
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already create like on this post'
+  })
+  @Post('/:id/likes/like')
+  public async like(@Req() req: Request, @Param('id') postId: string): Promise<PostLikeRDO> {
+    const { data } = await this.httpService.axiosRef.post(`${ApplicationServiceURL.Posts}/${postId}/likes/like`, null, {
+      headers: { 'Authorization': req.headers['authorization'] }
+    } );
+    return data;
+  }
+
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'The post was successfully published from a draft'
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Post with this id not found'
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'Post with this id already published'
+  })
+  @Patch('/:id/publish')
+  public async publish(@Param('id') id: string) {
+    const { data } = await this.httpService.axiosRef.patch(`${ApplicationServiceURL.Posts}/${id}/publish`);
+    return data;
+  }
+
+  @ApiResponse({
+    status: HttpStatus.NO_CONTENT,
+    description: 'Like has been deleted'
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User don\'t like this post before'
+  })
+  @Delete('/:id/likes/dislike')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  public async dislike(@Req() req: Request, @Param('id') @Param() postId: string) {
+    const { data } = await this.httpService.axiosRef.delete(`${ApplicationServiceURL.Posts}/${postId}/likes/dislike`, {
+      headers: { 'Authorization': req.headers['authorization'] }
+    })
+
+    return {data};
   }
 }
 

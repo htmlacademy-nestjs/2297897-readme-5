@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PostRepository } from './post.repository';
 import { CreatePostDTO } from './dto/create-post.dto';
 import { PostEntity } from './post.entity';
 import { PostQuery } from './query/post.query';
-import { PaginationResult } from '@project/libs/shared/types';
+import { PaginationResult, PostState } from '@project/libs/shared/types';
 import { UpdatePostDTO } from './dto/update-post.dto';
 import { PostTagService } from '../post-tag/post-tag.service';
 
@@ -57,6 +57,22 @@ export class PostService {
 
       return this.postRepository.update(id, existsPost);
     }
+  }
+
+  public async publishPost(id: string) {
+    let existsPost: PostEntity | never;
+
+    try {
+      existsPost = await this.postRepository.findById(id);
+    } catch {
+      throw new NotFoundException(`Post with id «${id}» not found`);
+    }
+
+    if (existsPost.postState === PostState.Published) {
+      throw new ConflictException(`Post with id «${existsPost.id}» already published`)
+    }
+
+    return this.postRepository.publish(existsPost.id);
   }
 
   public async deletePost(id: string) {

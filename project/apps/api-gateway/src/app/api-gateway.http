@@ -16,24 +16,23 @@ Content-Type: application/json
 
 {
   "email": "wroom@bike.com",
-  "password": "iAmAkira"
+  "password": "coolSecret"
 }
-
 ###
 
 #Refresh access/refresh tokens
 POST http://localhost:4546/api/auth/refresh HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5NDE5NTY2YzEyNzRhMzdhMTI0NGYiLCJlbWFpbCI6Im5pa2l0YXppbUBnbWFpbC5sb2NhbCIsIm5hbWUiOiJOaWtpdGFMaW1pbiIsImF2YXRhclVybCI6InVwbG9hZHMvYXZhdGFycy8xMjMiLCJ0b2tlbklkIjoiNmYyNGVkY2QtMWI3OC00Zjk3LWIxMGUtMGJlZjQyMzdiMTJlIiwiaWF0IjoxNzA2NjY4NjQ2LCJleHAiOjE3MDkyNjA2NDZ9.KMRGYp3FrbvnV0DG2RdpSqJN_tUk65h_HbKxDJ6T4C8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJ0b2tlbklkIjoiY2NhMDI0ODctYmE2ZS00MTI5LWI2MDQtZjZhNjg3M2ZjYzEzIiwiaWF0IjoxNzA3MDY5MjU5LCJleHAiOjE3MDk2NjEyNTl9.ik4Ns4O8QGIM-y9U9ZzFurTh44Z4Oa1CZEty58XfIMU
 ###
 
 #Get user by id
 GET http://localhost:4546/api/auth/65b9b8eec998deaad5595af0 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY2NzU2OTgsImV4cCI6MTcwNjY3NTk5OH0.r1csGK-q5aeYSCeHPQ3GvHATkmO2gItESgxkV99LVTs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY5ODMwMjYsImV4cCI6MTcwNjk4MzMyNn0.zoe7Wfnud_2v1HBAY63veOw-tdG5VhHq1BRmlKh6ASQ
 ###
 
 #Change user password
 PATCH http://localhost:4546/api/auth/65b9bdcba711490c408ac3d6 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY2NzE1OTgsImV4cCI6MTcwNjY3MTg5OH0.nllc8Znqf6hh4gx2qcUoeeI9BliJZbwCI7cyjakS0fE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDY5ODMwMjYsImV4cCI6MTcwNjk4MzMyNn0.zoe7Wfnud_2v1HBAY63veOw-tdG5VhHq1BRmlKh6ASQ
 Content-Type: application/json
 
 {
@@ -55,7 +54,6 @@ Content-Disposition: form-data; name="file"; filename="testPhoto"
 
 <C:\Users\alien\Downloads\j2xS3_9sazQ.jpg
 --boundary--
-
 ###
 
 #Get post by Title
@@ -69,11 +67,10 @@ Content-Type: application/json
 
 #Get all posts
 GET http://localhost:3000/api/posts/ HTTP/1.1
-
 ###
 
 #Get post by id
-GET http://localhost:3000/api/posts/1c711844-dcd4-4a0b-af31-2eda29ab56ec HTTP/1.1
+GET http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5 HTTP/1.1
 ###
 
 #Create new Post
@@ -92,15 +89,28 @@ Content-Type: application/json
 ###
 
 #Update post by ID
-PATCH  http://localhost:3000/api/posts/a928035a-aaa9-4df9-999f-8de262c5be11 HTTP/1.1
+PATCH http://localhost:3000/api/posts/59d5d02c-3247-4395-95f9-1ccda3a08bbf HTTP/1.1
 Content-Type: application/json
 
 {
-  "quoteAuthor": "LipsumBOrg"
+  "announcement": "Минимальная длина 50 символов, максимальная 255. Текст с анонсом публикации."
 }
 ###
 
 #Delete post by ID
-DELETE http://localhost:4000/api/posts/a928035a-aaa9-4df9-999f-8de262c5be11 HTTP/1.1
+DELETE http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5 HTTP/1.1
+###
 
+#Add like on post
+POST http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5/likes/like HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDcwNjg1NzksImV4cCI6MTcwNzA2ODg3OX0.YXWTGAC9Ij-1Kf08Z81fOA_csyZC9PJR8i9e0ryyQmE
+###
+
+#Delete like from post
+DELETE http://localhost:3000/api/posts/12ba7b55-ee20-4c53-8d0f-b5179f2975d5/likes/dislike HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWI5YmRjYmE3MTE0OTBjNDA4YWMzZDYiLCJlbWFpbCI6Indyb29tQGJpa2UuY29tIiwibmFtZSI6IkFraXJhUmFjZXIiLCJhdmF0YXJVcmwiOiJ1cGxvYWRzL2F2YXRhcnMvcmFjZXIiLCJpYXQiOjE3MDcwNjg1NzksImV4cCI6MTcwNzA2ODg3OX0.YXWTGAC9Ij-1Kf08Z81fOA_csyZC9PJR8i9e0ryyQmE
+###
+
+#Publish post by ID
+PATCH  http://localhost:3000/api/posts/1c711844-dcd4-4a0b-af31-2eda29ab56ec/publish HTTP/1.1
 ###

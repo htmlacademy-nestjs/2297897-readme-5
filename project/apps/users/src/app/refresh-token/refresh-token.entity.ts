@@ -1,4 +1,4 @@
-import { DefaultPOJOType, Entity } from '@project/libs/shared/core';
+import { Entity } from '@project/libs/shared/core';
 import { BaseToken } from '@project/libs/shared/types';
 
 export class RefreshTokenEntity implements Entity<string>, BaseToken {

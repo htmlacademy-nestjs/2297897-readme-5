@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ENV_POSTS_FILEPATH } from './config-posts.const';
 import applicationConfig from './app.config';
+import jwtConfig from './jwt.config';
 
 @Module({
   imports: [
@@ -9,7 +10,7 @@ import applicationConfig from './app.config';
       isGlobal: true,
       cache: true,
       envFilePath: ENV_POSTS_FILEPATH,
-      load: [applicationConfig]
+      load: [applicationConfig, jwtConfig]
     })
   ]
 })

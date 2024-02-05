@@ -1,10 +1,11 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Req } from '@nestjs/common';
 import { PostLikeService } from './post-like.service';
 import { fillDTO } from '@project/libs/shared/helpers';
 import { PostLikeRDO } from './rdo/post-like.rdo';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthUser } from '@project/libs/shared/core';
-import { TokenPayload } from '@project/libs/shared/types';
+import { UseGuards } from '@nestjs/common';
+import { JWTAuthGuard } from '@project/libs/shared/core';
+import { RequestWithTokenPayload } from '@project/libs/shared/types';
 
 @ApiTags('likes')
 @Controller('posts/:postId/likes')
@@ -17,9 +18,14 @@ export class PostLikeController {
     status: HttpStatus.CREATED,
     description: 'A new like has been created'
   })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User already create like on this post'
+  })
   @Post('/like')
-  public async like(@Body() userId: string, @Param('postId') postId: string): Promise<PostLikeRDO> {
-    const newLike = await this.postLikeService.createLike(postId, userId);
+  @UseGuards(JWTAuthGuard)
+  public async like(@Req() { user }: RequestWithTokenPayload, @Param('postId') postId: string): Promise<PostLikeRDO> {
+    const newLike = await this.postLikeService.createLike(postId, user.sub);
     return fillDTO(PostLikeRDO, newLike.serialize());
   }
 
@@ -27,9 +33,15 @@ export class PostLikeController {
     status: HttpStatus.NO_CONTENT,
     description: 'Like has been deleted'
   })
-  @Post('/dislike')
-  public async dislike(@Body() userId: string, @Param('postId') postId: string): Promise<void> {
-    await this.postLikeService.deleteLike(postId, userId);
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User don\'t like this post before'
+  })
+  @Delete('/dislike')
+  @UseGuards(JWTAuthGuard)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  public async dislike(@Req() { user }: RequestWithTokenPayload, @Param('postId') postId: string): Promise<void> {
+    await this.postLikeService.deleteLike(postId, user.sub);
   }
 
   @ApiResponse({

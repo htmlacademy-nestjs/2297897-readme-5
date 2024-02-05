@@ -46,7 +46,7 @@ export class PostLikeRepository extends BasePostgresRepository<PostLikeEntity, L
   }
 
   public async findByIds (postId: string, userId: string) {
-    return await this.client.like.findFirst({
+    return this.client.like.findFirst({
       where: {
         AND: [{ postId }, { userId }]
       },

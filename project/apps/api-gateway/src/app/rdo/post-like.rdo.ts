@@ -1,14 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
-export class PostCommentRDO {
+export class PostLikeRDO {
   @ApiProperty({
-    description: 'Current like ID in DB',
+    description: 'Like creator valid MongoId',
     example: '51bd7639-adc1-49c6-8fc1-be98969f0c7e'
   })
   @Expose()
   public Id: string;
-
 
   @ApiProperty({
     description: 'Like creator valid MongoId',

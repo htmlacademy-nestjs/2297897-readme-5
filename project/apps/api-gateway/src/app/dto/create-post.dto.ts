@@ -1,5 +1,5 @@
 import { User, PostType, Tag } from '@project/libs/shared/types';
-import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, IsMimeType, Length, ArrayMinSize, ArrayMaxSize } from 'class-validator';
+import { IsEnum, IsMongoId, IsUUID, ValidateIf, MinLength, MaxLength, IsUrl, IsOptional, ArrayMaxSize } from 'class-validator';
 import { POST_AVAILABLE_VALUE } from '../const';
 import { POST_VALIDATION_MESSAGE } from '../const';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';

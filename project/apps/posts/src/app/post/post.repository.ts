@@ -1,6 +1,6 @@
 import { BasePostgresRepository } from '@project/libs/shared/core';
 import { PostEntity } from './post.entity';
-import { Post, PaginationResult } from '@project/libs/shared/types';
+import { Post, PaginationResult, PostState } from '@project/libs/shared/types';
 import { PrismaClientService } from '@project/libs/shared/posts/models';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
@@ -37,7 +37,7 @@ export class PostRepository extends BasePostgresRepository<PostEntity, Post> {
   }
 
   private async getPostsCount(where: Prisma.PostWhereInput): Promise<number> {
-    return await this.client.post.count({ where });
+    return this.client.post.count({ where });
   }
 
   private calculatePostPage(totalCount: number, limit: number): number {
@@ -148,7 +148,23 @@ export class PostRepository extends BasePostgresRepository<PostEntity, Post> {
       }
     });
 
-
     return documents.map((document) => this.createEntityFromDocument(document as Post));
+  }
+
+  public async publish(id: string): Promise<PostEntity> {
+    const updatedDocument = await this.client.post.update({
+      where: { id },
+      data: {
+        postState: PostState.Published,
+        publishDate: new Date(),
+      },
+      include: {
+        tags: true,
+        likes: true,
+        comments: true,
+      }
+    })
+
+    return this.createEntityFromDocument(updatedDocument as Post);
   }
 }

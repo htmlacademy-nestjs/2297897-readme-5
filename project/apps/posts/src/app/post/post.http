@@ -61,3 +61,8 @@ Content-Type: application/json
 DELETE http://localhost:4000/api/posts/9e3c1668-cf8e-4362-b73c-7db26797826b HTTP/1.1
 
 ###
+
+#Publish post by ID
+PATCH  http://localhost:4000/api/posts/51bd7639-adc1-49c6-8fc1-be98969f0c7e/publish HTTP/1.1
+
+###

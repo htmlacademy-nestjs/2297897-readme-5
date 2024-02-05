@@ -80,7 +80,7 @@ export class AuthService {
     }
 
     await existsUser.setPassword(dto.newPassword);
-    return this.userRepository.update(existsUser.id, existsUser);;
+    return this.userRepository.update(existsUser.id, existsUser);
   }
 
   public async getUserByEmail(email: string) {
@@ -101,7 +101,7 @@ export class AuthService {
       avatarUrl: user.avatarUrl
     };
     const refreshTokenPayload = { ...accessTokenPayload, tokenId: crypto.randomUUID() };
-    this.refreshTokenService.createRefreshSession(refreshTokenPayload);
+    await this.refreshTokenService.createRefreshSession(refreshTokenPayload);
 
     try {
       const [accessToken, refreshToken] = await Promise.all([
