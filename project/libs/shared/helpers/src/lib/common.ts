@@ -32,12 +32,6 @@ export function getMongoConnectionString({ username, password, host, port, datab
   return `mongodb://${username}:${password}@${host}:${port}/${databaseName}?authSource=${authDatabase}`;
 }
 
-export function isPostType(value: unknown): asserts value is PostType {
-  if (typeof value !== 'string' || !Object.values(PostType).includes(value as PostType)) {
-    throw new TypeError(`${value} is not valid post type`);
-  }
-}
-
 export function getRabbitMQConnectionString({ user, password, host, port }) {
   return `amqp://${user}:${password}@${host}:${port}`;
 }

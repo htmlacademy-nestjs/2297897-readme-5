@@ -110,7 +110,6 @@ export const USER_VALIDATON_MESSAGE = {
   }
 } as const;
 
-export const SALT_ROUNDS = 10;
 export const USER_AVAILABLE_VALUE = {
   NAME: {
     MIN_LENGTH: 3,

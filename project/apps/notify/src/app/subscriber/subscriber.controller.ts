@@ -19,7 +19,7 @@ export class EmailSubscriberController {
     queue: RabbitRouting.Default
   })
   public async create(subscriber: CreateSubscriberDTO) {
-    this.emailSubscriberService.addSubscriber(subscriber);
-    this.mailService.sendNotifyNewSubscriber(subscriber);
+    await this.emailSubscriberService.addSubscriber(subscriber);
+    await this.mailService.sendNotifyNewSubscriber(subscriber);
   }
 }

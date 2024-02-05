@@ -101,7 +101,7 @@ export class AuthService {
       avatarUrl: user.avatarUrl
     };
     const refreshTokenPayload = { ...accessTokenPayload, tokenId: crypto.randomUUID() };
-    this.refreshTokenService.createRefreshSession(refreshTokenPayload);
+    await this.refreshTokenService.createRefreshSession(refreshTokenPayload);
 
     try {
       const [accessToken, refreshToken] = await Promise.all([
